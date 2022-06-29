@@ -8,7 +8,7 @@ from typing import List, Tuple, Dict
 import torch
 
 
-def get_directories(path:str, print=True) -> List[str]:
+def get_directories(path:str, print_result=True) -> List[str]:
     '''
     Returns the list of directories within the given path
 
@@ -20,7 +20,7 @@ def get_directories(path:str, print=True) -> List[str]:
     '''
     dir_list = os.listdir(path)
     
-    if print:
+    if print_result:
         print("Directories in '", path, "' :")
         print(dir_list)
 
@@ -101,6 +101,45 @@ def remove_odd_rooms(rooms:str, excluded:str, rooms_cleaned:str) -> None:
     rooms_cleaned_f.close()
 
 
+def get_object_class(threshold:int) -> dict:
+    '''
+    Get object-to-class dictionary
+
+    Parameters:
+        threshold: ignore objects with frequency under threshold
+
+    Returns:
+        dictionary where key is the object label and the value is its one-hot class
+    '''
+    # Get objects of interest 
+    objects = []
+    objects_of_interest = []
+    with open('objects_and_frequency.txt', 'r') as f:
+        objects = f.readlines()
+    for object in objects:
+        freq = int(object.split(",")[1])
+        obj = object.split(",")[0]
+        if freq > threshold:
+            objects_of_interest.append(obj)
+    num_objects_of_interest = len(objects_of_interest)
+    # print(objects_of_interest, num_objects_of_interest)
+
+    # Construct one-hot vector
+    import numpy as np
+    a = np.array([x for x in range(num_objects_of_interest)])
+    one_hots = np.zeros((a.size, a.max()+1))
+    one_hots[np.arange(a.size),a] = 1
+    one_hots = torch.from_numpy(one_hots).int()
+    # print(one_hots)
+
+    # Associate objects of interest with their one-hot class
+    obj_dic = {}
+    for i in range(num_objects_of_interest):
+        obj_dic[objects_of_interest[i]] = one_hots[i]
+    # print(obj_dic["pillow"])
+    return obj_dic
+
+
 def get_object_info_json(path:str) -> List[Tuple]:
     '''
     Get object information from .json file
@@ -111,6 +150,9 @@ def get_object_info_json(path:str) -> List[Tuple]:
     Returns:
         list of information of each object in the .json file
     '''
+    # Change threshold
+    obj_dic = get_object_class(threshold=100)
+
     with open(path) as f:
         data = json.load(f)
     f.close()
@@ -119,7 +161,14 @@ def get_object_info_json(path:str) -> List[Tuple]:
     for obj in data['segGroups']:
         pos = torch.tensor(obj['obb']['centroid'])
         normal = torch.tensor(obj['dominantNormal'])
-        obj_info = (pos, normal)
+        raw_label = obj['label']
+        if raw_label in obj_dic.keys():
+            label = obj_dic[raw_label]
+            ignore = False
+        else:
+            label = -1
+            ignore = True
+        obj_info = (pos, label, normal, ignore)
         lst.append(obj_info)
     
     return lst

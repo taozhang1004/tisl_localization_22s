@@ -139,6 +139,7 @@ def load_object_vertex(raw_vs:List[Tuple], pos_ind:int, feat_ind:int) -> List[ve
     '''
     lst = []
     for raw_v in raw_vs:
-        vertex_v = vertex(0, raw_v[pos_ind], raw_v[feat_ind])
-        lst.append(vertex_v)
+        if not raw_v[-1]:
+            vertex_v = vertex(0, raw_v[pos_ind], raw_v[feat_ind])
+            lst.append(vertex_v)
     return lst
