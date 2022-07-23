@@ -5,7 +5,10 @@ import random
 from os.path import join, isfile
 from tkinter.messagebox import NO
 from typing import List, Tuple, Dict
+import numpy as np
 import torch
+import networkx as nx
+import matplotlib.pyplot as plt
 
 
 def get_directories(path:str, print_result=True) -> List[str]:
@@ -125,7 +128,6 @@ def get_object_class(threshold:int) -> dict:
     # print(objects_of_interest, num_objects_of_interest)
 
     # Construct one-hot vector
-    import numpy as np
     a = np.array([x for x in range(num_objects_of_interest)])
     one_hots = np.zeros((a.size, a.max()+1))
     one_hots[np.arange(a.size),a] = 1
@@ -140,18 +142,20 @@ def get_object_class(threshold:int) -> dict:
     return obj_dic
 
 
-def get_object_info_json(path:str) -> List[Tuple]:
+def get_object_info_json(path:str, threshold:int) -> Tuple[int, List[Tuple]]:
     '''
     Get object information from .json file
 
     Parameters:
         path: the .json file path 
+        threshold: on the frequency
 
     Returns:
+        number of classes &
         list of information of each object in the .json file
     '''
     # Change threshold
-    obj_dic = get_object_class(threshold=100)
+    obj_dic = get_object_class(threshold)
 
     with open(path) as f:
         data = json.load(f)
@@ -168,15 +172,26 @@ def get_object_info_json(path:str) -> List[Tuple]:
         else:
             label = -1
             ignore = True
-        obj_info = (pos, label, normal, ignore)
+        obj_info = (pos, label, ignore)
         lst.append(obj_info)
     
-    return lst
+    return len(obj_dic), lst
 
 
-def build_dataset(rooms_path:str, target_name:str, pos_ind:int, feat_ind:int, base:int, method:int, ratio:float) -> None:
+def get_scan_emb_info(scan:str) -> torch.Tensor:
+    parent_path = "pca_vlad_embeddings_50_random_images"
+    child_path = scan + ".txt"
+    path = join(parent_path, child_path)
+
+    np_mtx = np.loadtxt(path, dtype=float)
+    tch_mtx = torch.from_numpy(np_mtx)
+    
+    return tch_mtx
+
+
+def build_dataset(rooms_path:str, target_name:str, pos_ind:int, feat_ind:int, base:int, method:int, ratio:float, threshold:int) -> None:
     '''
-    Build dataset for DGCNN.
+    Build dataset for DGCNN. (obj version)
 
     Parameters:
         rooms_path: the path of the .txt file which stores all rooms
@@ -194,18 +209,25 @@ def build_dataset(rooms_path:str, target_name:str, pos_ind:int, feat_ind:int, ba
     scan_to_label = generate_labels(rooms_path)
 
     f_path = join('pytorch_DGCNN-master/data', target_name, target_name+'.txt')
-    f = open(f_path, 'w')
-    f.write(str(len(scan_to_label))+'\n')
-    f.close()
+    with open(f_path, 'r+') as f:
+        f.truncate(0)
+    # f = open(f_path, 'w')
+    # f.write(str(len(scan_to_label))+'\n')
+    # f.close()
+    count = 0
     for scan, label in scan_to_label.items():
         label = str(scan_to_label[scan])
         
         # get obj info
         path = join(data_path, scan, 'semseg.v2.json')
-        obj_info = get_object_info_json(path)
+        obj_info = get_object_info_json(path, threshold)
 
         # then get obj vertex
         obj_v = grakit.load_object_vertex(raw_vs=obj_info, pos_ind=pos_ind, feat_ind=feat_ind)
+        if obj_v == []: 
+            print("scan: {} with label: {} is ignored".format(scan, label))
+            continue
+        count += 1
         obj_g = grakit.graph(vertices=obj_v, base=base, method=method, ratio=ratio)
         deg_lst = obj_g.get_nbs()[0]
         nbs_lst = obj_g.get_nbs()[1]
@@ -217,7 +239,82 @@ def build_dataset(rooms_path:str, target_name:str, pos_ind:int, feat_ind:int, ba
             nbs = " ".join(map(str, nbs_lst[i]))
             feat = " ".join(map(str, v.feat.numpy()))
             f.write(" ".join([tag, str(deg_lst[i]), nbs, feat]) + '\n')
+            # f.write(" ".join([tag, str(deg_lst[i]), nbs]) + '\n')
         f.close()
+    with open(f_path, 'r+') as f:
+        content = f.read()
+        f.seek(0, 0)
+        f.write(str(count) + '\n' + content)
+
+
+def build_dataset_combined(rooms_path:str, target_name:str, pos_ind:int, feat_ind:int, base:int, method:int, ratio:float, threshold:int) -> None:
+    '''
+    Build dataset for DGCNN. (obj version)
+
+    Parameters:
+        rooms_path: the path of the .txt file which stores all rooms
+        target_name: the name of the dataset
+        pos_ind: see @grakit.load_object_vertex
+        feat_ind: see @grakit.load_object_vertex
+        base: see @grakit.generate_edge
+        method: see @grakit.generate_edge
+        ratio: see @grakit.generate_edge
+
+    Returns:
+        None
+    '''
+    data_path = '3rscan'
+    scan_to_label = generate_labels(rooms_path)
+
+    f_path = join('pytorch_DGCNN-master/data', target_name, target_name+'.txt')
+    with open(f_path, 'r+') as f:
+        f.truncate(0)
+    
+    count = 0
+    for scan, label in scan_to_label.items():
+        label = str(scan_to_label[scan])
+        
+        # get obj info
+        path = join(data_path, scan, 'semseg.v2.json')
+        num_class, obj_info = get_object_info_json(path, threshold)
+
+        # then get obj vertex
+        obj_v = grakit.load_object_vertex(raw_vs=obj_info, pos_ind=pos_ind, feat_ind=feat_ind)
+
+        # get emb info
+        emb_info = get_scan_emb_info(scan)
+
+        # then get emb vertex
+        emb_v = grakit.load_emb_vertex(emb_info)
+
+        for j in range(10):
+            sample_obj_v = random.sample(obj_v, min(len(obj_v), 4))
+            sample_emb_v = random.sample(emb_v, min(len(emb_v), 5))
+            sample_v = sample_obj_v + sample_emb_v
+
+            g = grakit.graph(vertices=sample_v, base=base, method=method, ratio=ratio)
+            deg_lst = g.get_nbs()[0]
+            nbs_lst = g.get_nbs()[1]
+        
+            f = open(f_path, 'a')
+            f.write(str(len(sample_v)) + ' ' + label + '\n')
+            for i, v in enumerate(sample_v):
+                tag = str(v.tag)
+                nbs = " ".join(map(str, nbs_lst[i]))
+                feat = " ".join(map(str, v.feat.numpy()))
+                if tag == "0": # emb, so pad for obj
+                    obj_pad = " ".join(map(str, np.zeros(num_class)))
+                    f.write(" ".join([tag, str(deg_lst[i]), nbs, feat, obj_pad]) + '\n')
+                elif tag == "1": # obj, so pad for emb
+                    emb_pad = " ".join(map(str, np.zeros(64)))
+                    f.write(" ".join([tag, str(deg_lst[i]), nbs, emb_pad, feat]) + '\n')
+            f.close()
+            count += 1
+
+    with open(f_path, 'r+') as f:
+        content = f.read()
+        f.seek(0, 0)
+        f.write(str(count) + '\n' + content)
 
 
 def build_cv_split_10fold(data:str, total_size:int, test_size:int) -> None:
@@ -249,3 +346,49 @@ def build_cv_split_10fold(data:str, total_size:int, test_size:int) -> None:
             for ind in ind_list[train_size:]:
                 f.write("{}\n".format(ind))
         f.close()
+
+def visualize_graph(data:str, node_size:int, nth:int, num_columns:int, figsize:Tuple[int], is_color_graph: bool) -> None:
+    f = open(data, 'r')
+    # num_classes = 55
+    num_graphs = int(f.readline())
+    num_rows = (num_graphs // num_columns) + 1
+    # print(num_graphs)
+    plt.figure(figsize=figsize)
+    for i in range(num_graphs // nth):
+        # for one graph
+        g_info = f.readline().split()
+        num_vertices = int(g_info[0])
+        label = g_info[1]
+    #     print(num_vertices)
+        G = nx.Graph()
+        if is_color_graph:
+            colors = []
+        for j in range(num_vertices):
+            # for one vertex
+            vertex_info = f.readline().split()
+            tag = int(vertex_info[0])
+            num_nbs = int(vertex_info[1])
+            if is_color_graph:
+    #             obj_class = vertex_info[num_nbs+2:].index("1")
+                colors.append(tag/2)
+            if num_nbs == 0:
+                G.add_node(j)
+            else:
+                for k in range(2, num_nbs + 2):
+                    G.add_edge(j, int(vertex_info[k]))
+        plt.subplot(num_rows, num_columns, i+1)
+        plt.title('label: {}'.format(label))
+        options = {
+        "font_size": 1,
+        "node_size": node_size,
+    #     "node_color": "white",
+    #     "edgecolors": "black",
+    #     "linewidths": 5,
+    #     "width": 5,
+        }
+    #     colors = [i/len(G.nodes) for i in range(len(G.nodes))]
+        if is_color_graph:
+            nx.draw_networkx(G, **options, node_color=colors)
+        else:
+            nx.draw_networkx(G, **options)
+    f.close()

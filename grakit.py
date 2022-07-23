@@ -95,8 +95,12 @@ class graph(object):
 
     Attributes
     ----------
-    vertices : List[vertex]
+    V : List[vertex]
         list of integers indicating the indices of the neighbors of the vertex
+    V_size : int
+        number of vertices in the graph
+    E : ndarray
+        edge matrix, which is the classic adjacency matrix but with diagonal being all 0
 
     Methods
     -------
@@ -140,6 +144,23 @@ def load_object_vertex(raw_vs:List[Tuple], pos_ind:int, feat_ind:int) -> List[ve
     lst = []
     for raw_v in raw_vs:
         if not raw_v[-1]:
-            vertex_v = vertex(0, raw_v[pos_ind], raw_v[feat_ind])
+            vertex_v = vertex(1, raw_v[pos_ind], raw_v[feat_ind])
             lst.append(vertex_v)
+    return lst
+
+
+def load_emb_vertex(emb_info:torch.Tensor) -> List[vertex]:
+    '''
+    Given a 2D tensor representing raw data and return the list of vertices from of it
+
+    Parameters:
+        emb_info : 2D tensor
+        
+    Returns:
+        List[vertex]: The list of vertex representation
+    '''
+    lst = []
+    for row in emb_info:
+        vertex_v = vertex(0, row[:3], row[3:])
+        lst.append(vertex_v)
     return lst
