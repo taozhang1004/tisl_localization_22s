@@ -1,14 +1,16 @@
 import os
 import json
+from traceback import print_tb
 import grakit
-import random
-from os.path import join, isfile
-from tkinter.messagebox import NO
-from typing import List, Tuple, Dict
-import numpy as np
 import torch
 import networkx as nx
 import matplotlib.pyplot as plt
+import random
+from os.path import join, isfile
+from tkinter.messagebox import NO
+from typing import List, Tuple, Dict, Union
+import numpy as np
+
 
 
 def get_directories(path:str, print_result=True) -> List[str]:
@@ -30,26 +32,70 @@ def get_directories(path:str, print_result=True) -> List[str]:
     return dir_list
 
 
-def generate_labels(path:str) -> dict:
+def generate_labels(path:str, mode:int) -> Union[dict, Tuple[dict, dict]]:
     '''
-    Returns a generated dictionary for rooms classification 
+    Returns two generated dictionaries for rooms classification 
 
     Parameters:
         path (str): the path for the text file containng room-scan information,
                     where each line has scan(s) for one room
+        mode:
+            0 if require no split i.e., all the scans in the given file go to one set;
+            1 if require spilt e.g., part of the scans in the given file go to one set, the rest go to another
 
     Returns:
-        labels (Dict[str:int]): key: scan; value: label
+        if mode == 0:
+            labels (Dict[str:int]): key: scan; value: label
+        if mode == 1:
+            (labels_train, labels_valid) where:
+                labels_train (Dict[str:int]): key: scan; value: label;
+                labels_valid (Dict[str:int]): key: scan; value: label
     '''
-    with open(path, 'r') as f:
-        rooms = f.read().splitlines()
-    f.close()
-    labels = {}
-    for i, room in enumerate(rooms):
-        scans = room.split()
-        for scan in scans:
-            labels[scan] = i
-    return labels
+    if mode == 0: 
+        # one set
+        with open(path, 'r') as f:
+            rooms = f.read().splitlines()
+        f.close()
+        labels = {}
+        for i, room in enumerate(rooms):
+            scans = room.split()
+            for scan in scans:
+                labels[scan] = i
+        
+        return labels
+
+    elif mode == 1: 
+        # two splited sets
+        with open(path, 'r') as f:
+            rooms = f.read().splitlines()
+        f.close()
+        labels_train = {}
+        labels_valid = {}
+        for i, room in enumerate(rooms):
+            scans = room.split()
+            for scan in scans[:-1]:
+                labels_train[scan] = i
+            labels_valid[scans[-1]] = i
+        
+        return labels_train, labels_valid
+
+    else:
+        print("invalid mode")
+        return None
+
+
+def split_dictionary(raw:dict) -> Tuple[dict, dict]:
+    '''
+    Split the dictionary into two
+
+    Parameters:
+        raw: the given dictionary
+
+    Returns:
+        s1: the splited dictionary 1
+        s2: the splited dictionary 2
+    '''
+    pass
 
 
 def remove_odd_rooms(rooms:str, excluded:str, rooms_cleaned:str) -> None:
@@ -104,6 +150,27 @@ def remove_odd_rooms(rooms:str, excluded:str, rooms_cleaned:str) -> None:
     rooms_cleaned_f.close()
 
 
+def rooms_train_test_split(data:str, train_size:int) -> None:
+    '''
+    Split the given room data into train (actually train & valid) set and test set
+
+    Parameters:
+        data: the room data to be splited
+        train_size: the size of the train set
+
+    Returns:
+        None
+    '''
+    with open(data, 'r') as f:
+        room_lst = f.read().splitlines()
+    
+    with open('rooms_cleaned_train.txt', 'w') as f:
+        f.write('\n'.join(room_lst[:train_size]))
+
+    with open('rooms_cleaned_test.txt', 'w') as f:
+        f.write('\n'.join(room_lst[train_size:]))
+
+
 def get_object_class(threshold:int) -> dict:
     '''
     Get object-to-class dictionary
@@ -117,7 +184,7 @@ def get_object_class(threshold:int) -> dict:
     # Get objects of interest 
     objects = []
     objects_of_interest = []
-    with open('objects_and_frequency.txt', 'r') as f:
+    with open('/home/igor/Desktop/tao/tisl/tisl_localization_22s/objects_and_frequency.txt', 'r') as f:
         objects = f.readlines()
     for object in objects:
         freq = int(object.split(",")[1])
@@ -179,6 +246,17 @@ def get_object_info_json(path:str, threshold:int) -> Tuple[int, List[Tuple]]:
 
 
 def get_scan_emb_info(scan:str) -> torch.Tensor:
+    '''
+    Get all the (frame) embeddings for a given scan
+
+    Parameters:
+        scan: the name of a scan 
+
+    Returns:
+        tch_mtx: a torch tensor contains all the embedding infomation where each row is for one frame:
+            row[:3]: the 3D position at where the frame is taken
+            row[3:3 + dim(emb)]" the embedding of the frame
+    '''
     parent_path = "pca_vlad_embeddings_50_random_images"
     child_path = scan + ".txt"
     path = join(parent_path, child_path)
@@ -189,90 +267,28 @@ def get_scan_emb_info(scan:str) -> torch.Tensor:
     return tch_mtx
 
 
-def build_dataset(rooms_path:str, target_name:str, pos_ind:int, feat_ind:int, base:int, method:int, ratio:float, threshold:int) -> None:
+def generate_graphs(data_path:str, f_path:str, scans:dict, num:int, pos_ind:int, feat_ind:int, base:int, method:int, ratio:float, threshold:int) -> int:
     '''
-    Build dataset for DGCNN. (obj version)
+    Generate graphs for given scans, and write them onto the given .txt file
 
     Parameters:
-        rooms_path: the path of the .txt file which stores all rooms
-        target_name: the name of the dataset
+        data_path: the name of dataset (for this project is '3rscan')
+        f_path: the path of the .txt file we want to write on
+        scans: the dictionary[scan,label] contains all the scans, for which we want to generate graphs
+        num: number of graphs to generate for each scan
         pos_ind: see @grakit.load_object_vertex
         feat_ind: see @grakit.load_object_vertex
         base: see @grakit.generate_edge
         method: see @grakit.generate_edge
         ratio: see @grakit.generate_edge
+        threshold: see @build_dataset_combined
 
     Returns:
-        None
+        count: total number of graphs generated
     '''
-    data_path = '3rscan'
-    scan_to_label = generate_labels(rooms_path)
-
-    f_path = join('pytorch_DGCNN-master/data', target_name, target_name+'.txt')
-    with open(f_path, 'r+') as f:
-        f.truncate(0)
-    # f = open(f_path, 'w')
-    # f.write(str(len(scan_to_label))+'\n')
-    # f.close()
     count = 0
-    for scan, label in scan_to_label.items():
-        label = str(scan_to_label[scan])
-        
-        # get obj info
-        path = join(data_path, scan, 'semseg.v2.json')
-        obj_info = get_object_info_json(path, threshold)
-
-        # then get obj vertex
-        obj_v = grakit.load_object_vertex(raw_vs=obj_info, pos_ind=pos_ind, feat_ind=feat_ind)
-        if obj_v == []: 
-            print("scan: {} with label: {} is ignored".format(scan, label))
-            continue
-        count += 1
-        obj_g = grakit.graph(vertices=obj_v, base=base, method=method, ratio=ratio)
-        deg_lst = obj_g.get_nbs()[0]
-        nbs_lst = obj_g.get_nbs()[1]
-        
-        f = open(f_path, 'a')
-        f.write(str(len(obj_v)) + ' ' + label + '\n')
-        tag = '0'
-        for i, v in enumerate(obj_v):
-            nbs = " ".join(map(str, nbs_lst[i]))
-            feat = " ".join(map(str, v.feat.numpy()))
-            f.write(" ".join([tag, str(deg_lst[i]), nbs, feat]) + '\n')
-            # f.write(" ".join([tag, str(deg_lst[i]), nbs]) + '\n')
-        f.close()
-    with open(f_path, 'r+') as f:
-        content = f.read()
-        f.seek(0, 0)
-        f.write(str(count) + '\n' + content)
-
-
-def build_dataset_combined(rooms_path:str, target_name:str, pos_ind:int, feat_ind:int, base:int, method:int, ratio:float, threshold:int) -> None:
-    '''
-    Build dataset for DGCNN. (obj version)
-
-    Parameters:
-        rooms_path: the path of the .txt file which stores all rooms
-        target_name: the name of the dataset
-        pos_ind: see @grakit.load_object_vertex
-        feat_ind: see @grakit.load_object_vertex
-        base: see @grakit.generate_edge
-        method: see @grakit.generate_edge
-        ratio: see @grakit.generate_edge
-
-    Returns:
-        None
-    '''
-    data_path = '3rscan'
-    scan_to_label = generate_labels(rooms_path)
-
-    f_path = join('pytorch_DGCNN-master/data', target_name, target_name+'.txt')
-    with open(f_path, 'r+') as f:
-        f.truncate(0)
-    
-    count = 0
-    for scan, label in scan_to_label.items():
-        label = str(scan_to_label[scan])
+    for scan, label in scans.items():
+        label = str(scans[scan])
         
         # get obj info
         path = join(data_path, scan, 'semseg.v2.json')
@@ -283,13 +299,15 @@ def build_dataset_combined(rooms_path:str, target_name:str, pos_ind:int, feat_in
 
         # get emb info
         emb_info = get_scan_emb_info(scan)
+        if (len(emb_info) < 30) or (len(emb_info) > 50) : continue
+        # print(len(emb_info), scan, label)
 
         # then get emb vertex
         emb_v = grakit.load_emb_vertex(emb_info)
 
-        for j in range(10):
-            sample_obj_v = random.sample(obj_v, min(len(obj_v), 4))
-            sample_emb_v = random.sample(emb_v, min(len(emb_v), 5))
+        for j in range(num):
+            sample_obj_v = random.sample(obj_v, min(len(obj_v), random.randint(3, 5)))
+            sample_emb_v = random.sample(emb_v, min(len(emb_v), random.randint(4, 6)))
             sample_v = sample_obj_v + sample_emb_v
 
             g = grakit.graph(vertices=sample_v, base=base, method=method, ratio=ratio)
@@ -310,11 +328,61 @@ def build_dataset_combined(rooms_path:str, target_name:str, pos_ind:int, feat_in
                     f.write(" ".join([tag, str(deg_lst[i]), nbs, emb_pad, feat]) + '\n')
             f.close()
             count += 1
+    return count
+    
 
+def build_dataset_combined(mode:int, target_name:str, pos_ind:int, feat_ind:int, base:int, method:int, ratio:float, threshold:int) -> Tuple[int]:
+    '''
+    Build dataset for DGCNN.
+
+    Parameters:
+        rooms_path: the path of the .txt file which stores all rooms
+        target_name: the name of the dataset
+        pos_ind: see @grakit.load_object_vertex
+        feat_ind: see @grakit.load_object_vertex
+        base: see @grakit.generate_edge
+        method: see @grakit.generate_edge
+        ratio: see @grakit.generate_edge
+        threshold: only consider objects with frequency >= threshold
+        mode:
+            0 if Train & Valid;
+            1 if Train & Test
+
+    Returns:
+        None
+    '''
+    data_path = '3rscan'
+    scan_to_label_train, scan_to_label_valid = generate_labels(path='rooms_cleaned_train.txt', mode=1)
+    scan_to_label_test = generate_labels(path='rooms_cleaned_test.txt', mode=0)
+
+    # Initialite the file
+    f_path = join('pytorch_DGCNN-master/data', target_name, target_name+'.txt')
+    open(f_path, 'w').close()
+    
+    # Generate graphs for the training set
+    count_train = generate_graphs(data_path=data_path, f_path=f_path, scans=scan_to_label_train, num=10, \
+        pos_ind=pos_ind, feat_ind=feat_ind, base=base, method=method, ratio=ratio, threshold=threshold)
+
+    # Generate graphs for the validation/test set
+    if mode == 0:
+        # for validation set
+        count_rest = generate_graphs(data_path=data_path, f_path=f_path, scans=scan_to_label_valid, num=5, \
+            pos_ind=pos_ind, feat_ind=feat_ind, base=base, method=method, ratio=ratio, threshold=threshold)
+    elif mode == 1:
+        # for test set
+        count_rest = generate_graphs(data_path=data_path, f_path=f_path, scans=scan_to_label_test, num=5, \
+            pos_ind=pos_ind, feat_ind=feat_ind, base=base, method=method, ratio=ratio, threshold=threshold)
+    else:
+        print('invalid mode')
+        return None
+
+    # Conclude the file
     with open(f_path, 'r+') as f:
         content = f.read()
         f.seek(0, 0)
-        f.write(str(count) + '\n' + content)
+        f.write(str(count_train + count_rest) + '\n' + content)
+    
+    return count_train, count_rest
 
 
 def build_cv_split_10fold(data:str, total_size:int, test_size:int) -> None:
@@ -347,7 +415,50 @@ def build_cv_split_10fold(data:str, total_size:int, test_size:int) -> None:
                 f.write("{}\n".format(ind))
         f.close()
 
+
+def build_train_valid_split_fold(i:int, data:str, count_train:int, count_valid:int) -> None:
+    '''
+    Build train valid split (1 fold) for a dataset
+
+    Parameters:
+        i: in the i-th folders
+        data: the name of the dataset 
+        count_train: the size of the train split
+        count_valid: the size of the valid split
+
+    Returns:
+        None
+    '''
+    ind_list = [x for x in range(count_train + count_valid)]
+    test_file = 'test_idx-' + str(i) + '.txt'
+    train_file = 'train_idx-' + str(i) + '.txt'
+    test_path = join('pytorch_DGCNN-master', 'data', data, '10fold_idx', test_file)
+    train_path = join('pytorch_DGCNN-master', 'data', data, '10fold_idx', train_file)
+    with open(train_path, 'w') as f:
+        for ind in ind_list[:count_train]:
+            f.write("{}\n".format(ind))
+    f.close()
+    with open(test_path, 'w') as f:
+        for ind in ind_list[count_train:]:
+            f.write("{}\n".format(ind))
+    f.close()
+
+
 def visualize_graph(data:str, node_size:int, nth:int, num_columns:int, figsize:Tuple[int], is_color_graph: bool) -> None:
+    '''
+    Visualize graphs in the given data
+
+    Parameters:
+        data: input .txt file for DGCNN
+        node_size: size of the node of graph
+        nth: n-th of all graphs to be visualized
+        num_columns: number fo columns of the plot
+        figsize: figsize of the plot
+        is_color_graph: True if you want different classes have different colors
+
+    Returns:
+        None
+    '''
     f = open(data, 'r')
     # num_classes = 55
     num_graphs = int(f.readline())
