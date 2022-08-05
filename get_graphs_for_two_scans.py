@@ -84,7 +84,7 @@ def main():
     graph_embeddings_lst, test_scans_rooms_lst = get_scans_names_and_embeddings(graph_embeddings_path,
                                test_scans_rooms_path)
     
-    for i in range(10):
+	for i in range(10):
     	two_random_scans_path = f'random_scans/random_scan{i}.txt'             
     	get_two_random_scans_from_room(test_scans_rooms_lst, two_random_scans_path)
     	database_embeddings_path = f'room_embeddings_for_testing/database_embeddings{i}.txt'
@@ -93,4 +93,3 @@ def main():
 
                      
 main()
-

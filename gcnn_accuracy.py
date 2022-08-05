@@ -185,4 +185,3 @@ def main():
     print('average_top_five_score: ', average_top_five_score)
 
 main()
-
