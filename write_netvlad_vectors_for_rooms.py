@@ -28,8 +28,9 @@ def main():
                 vlad_embedding_lst = vlad_embedding_file.read().splitlines()
             vlad_embedding_file.close()
 
+            random_vlad_embedding_lst = random.sample(vlad_embedding_lst, 5)
             with open(vlad_embeddings_with_room_class_path, 'a') as vlad_embedding_with_room_class_file:
-                for vlad_embedding in vlad_embedding_lst:
+                for vlad_embedding in random_vlad_embedding_lst:
                     vlad_embedding_without_coordinates = vlad_embedding.split(" ")[3:]
                     vlad_embedding_with_room_class_file.write(str(count))
                     vlad_embedding_with_room_class_file.write(' ')
