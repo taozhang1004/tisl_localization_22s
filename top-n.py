@@ -2,7 +2,7 @@ import numpy as np
 
 NUM_EMB = 5
 
-data = np.genfromtxt('test_set_vlad_embeddings_only_in_graph.txt', delimiter=' ')
+data = np.genfromtxt('all_objects_all_embeddings.txt', delimiter=' ')
 
 room = data[:, 0]
 scan = np.zeros(room.shape)
