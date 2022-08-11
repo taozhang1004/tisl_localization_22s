@@ -306,9 +306,13 @@ def generate_graphs(data_path:str, f_path:str, scans:dict, num:int, pos_ind:int,
         emb_v = grakit.load_emb_vertex(emb_info)
 
         for j in range(num):
-            sample_obj_v = random.sample(obj_v, min(len(obj_v), random.randint(3, 5)))
+            sample_obj_v = random.sample(obj_v, min(len(obj_v), random.randint(4, 6)))
             sample_emb_v = random.sample(emb_v, min(len(emb_v), random.randint(4, 6)))
-            sample_v = sample_obj_v + sample_emb_v
+            # sample_v = sample_obj_v + sample_emb_v
+            # sample_v = sample_emb_v
+            sample_v = sample_obj_v
+
+            if len(sample_v) == 0: continue
 
             g = grakit.graph(vertices=sample_v, base=base, method=method, ratio=ratio)
             deg_lst = g.get_nbs()[0]
@@ -462,7 +466,8 @@ def visualize_graph(data:str, node_size:int, nth:int, num_columns:int, figsize:T
     f = open(data, 'r')
     # num_classes = 55
     num_graphs = int(f.readline())
-    num_rows = (num_graphs // num_columns) + 1
+    num_rows = 10
+    # num_rows = (num_graphs // num_columns) + 1
     # print(num_graphs)
     plt.figure(figsize=figsize)
     for i in range(num_graphs // nth):
