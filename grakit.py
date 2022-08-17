@@ -149,6 +149,26 @@ def load_object_vertex(raw_vs:List[Tuple], pos_ind:int, feat_ind:int) -> List[ve
     return lst
 
 
+def load_wall_vertex(raw_vs:List[Tuple], pos_ind:int, feat_ind:int) -> List[vertex]:
+    '''
+    Given a list of tuple representing raw data and return the list of vertices from of it
+
+    Parameters:
+        raw_vs : the raw data for object information
+        pos_ind: position index, indicating which index of the object information to be the position attribute of the vertex
+        feat_ind: feature index, indicating which index of the object information to be the feature attribute of the vertex
+        
+    Returns:
+        List[vertex]: The list of vertex representation
+    '''
+    lst = []
+    for raw_v in raw_vs:
+        if not raw_v[-1]:
+            vertex_v = vertex(1, raw_v[pos_ind], raw_v[feat_ind])
+            lst.append(vertex_v)
+    return lst
+
+
 def load_emb_vertex(emb_info:torch.Tensor) -> List[vertex]:
     '''
     Given a 2D tensor representing raw data and return the list of vertices from of it
