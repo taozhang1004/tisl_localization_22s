@@ -308,14 +308,6 @@ def generate_graphs(data_path:str, f_path:str, scans:dict, num:int, pos_ind:int,
         for j in range(num):
             sample_obj_v = random.sample(obj_v, min(len(obj_v), random.randint(4, 6)))
             sample_emb_v = random.sample(emb_v, min(len(emb_v), random.randint(4, 6)))
-<<<<<<< HEAD
-=======
-            # sample_v = sample_obj_v + sample_emb_v
-            # sample_v = sample_emb_v
-            sample_v = sample_obj_v
-
-            if len(sample_v) == 0: continue
->>>>>>> b1cb1d4254f707d69ecaa468d75b8b0c8cd4dcaf
 
             '''embeddings and objects'''
             #sample_v = sample_obj_v + sample_emb_v
@@ -324,8 +316,11 @@ def generate_graphs(data_path:str, f_path:str, scans:dict, num:int, pos_ind:int,
             '''embeddings only (from 8 to 12)'''
             sample_emb_v = random.sample(emb_v, min(len(emb_v), random.randint(8, 12)))
             sample_v = sample_emb_v
-            '''objects only (doesn't work for now)'''
+            '''objects only (from 4 to 6)'''
             #sample_v = sample_obj_v
+            '''objects only (from 8 to 12)'''
+            sample_obj_v = random.sample(emb_v, min(len(obj_v), random.randint(8, 12)))
+            sample_obj_v = sample_emb_v
             '''all objects all embeddings'''
             sample_v = obj_v + emb_v
 
