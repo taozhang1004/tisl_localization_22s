@@ -25,11 +25,14 @@ def main():
 
 
         for scan in scans_lst:
+
             vlad_embedding_path_specific_path = vlad_embeddings_path + '/' + scan + '.txt'
             with open(vlad_embedding_path_specific_path, 'r') as vlad_embedding_file:
                 vlad_embedding_lst = vlad_embedding_file.read().splitlines()
             vlad_embedding_file.close()
+
             random_vlad_embedding_lst = random.sample(vlad_embedding_lst, num_emb)
+
             with open(vlad_embeddings_with_room_class_path, 'a') as vlad_embedding_with_room_class_file:
             	for vlad_embedding in random_vlad_embedding_lst:
                     vlad_embedding_without_coordinates = vlad_embedding.split(" ")[3:]
@@ -38,6 +41,7 @@ def main():
                     vlad_embedding_with_room_class_file.write(' '.join(vlad_embedding_without_coordinates))
                     vlad_embedding_with_room_class_file.write('\n')
             vlad_embedding_with_room_class_file.close()
+            
         count +=1 
         
 main()
