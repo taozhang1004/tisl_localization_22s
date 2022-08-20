@@ -1,5 +1,5 @@
 import numpy as np
-NUM_EMB = 5
+# NUM_EMB = 5
 def get_top_n_score(embeddings_path, NUM_EMB):
 
     data = np.genfromtxt(embeddings_path, delimiter=' ')
