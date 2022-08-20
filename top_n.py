@@ -54,8 +54,3 @@ def get_top_n_score(NUM_EMB, embeddings_path):
     top5 = top5_count / emb.shape[0]
 
     return top1, top5
-
-
-
-
-    
