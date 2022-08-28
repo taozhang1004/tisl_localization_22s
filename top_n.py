@@ -1,8 +1,6 @@
 import numpy as np
-
-NUM_EMB = 5
-
-def get_top_n_score(embeddings_path):
+# NUM_EMB = 5
+def get_top_n_score(NUM_EMB, embeddings_path):
 
     data = np.genfromtxt(embeddings_path, delimiter=' ')
 
@@ -56,8 +54,3 @@ def get_top_n_score(embeddings_path):
     top5 = top5_count / emb.shape[0]
 
     return top1, top5
-
-
-
-
-    

@@ -184,7 +184,7 @@ def get_object_class(threshold:int) -> dict:
     # Get objects of interest 
     objects = []
     objects_of_interest = []
-    with open('/home/igor/Desktop/tao/tisl/tisl_localization_22s/objects_and_frequency.txt', 'r') as f:
+    with open('objects_and_frequency.txt', 'r') as f:
         objects = f.readlines()
     for object in objects:
         freq = int(object.split(",")[1])
@@ -354,7 +354,7 @@ def generate_graphs(data_path:str, f_path:str, scans:dict, num:int, pattern:Tupl
                 sample_v = sample_obj_v
 
             if len(sample_v) == 0: continue
-
+    
             g = grakit.graph(vertices=sample_v, base=base, method=method, ratio=ratio)
             deg_lst = g.get_nbs()[0]
             nbs_lst = g.get_nbs()[1]
