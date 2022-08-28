@@ -198,6 +198,18 @@ def get_object_class(threshold:int) -> dict:
     a = np.array([x for x in range(num_objects_of_interest)])
     one_hots = np.zeros((a.size, a.max()+1))
     one_hots[np.arange(a.size),a] = 1
+
+    # '''added strings by Victoria (in order to pad one-hot vector to 64 dim, which is dim for vlad vectors)'''
+    # one_hots_edited = []
+    # for i in range(one_hots.shape[0]):
+    #     new_arr = one_hots[i].tolist()
+    #     while(len(new_arr)!=64):
+    #         new_arr.append(0)
+    #     one_hots_edited.append(new_arr)
+    # one_hots = np.asarray(one_hots_edited)
+
+    # '''end of added strings'''
+
     one_hots = torch.from_numpy(one_hots).int()
     # print(one_hots)
 
@@ -267,7 +279,7 @@ def get_scan_emb_info(scan:str) -> torch.Tensor:
     return tch_mtx
 
 
-def generate_graphs(data_path:str, f_path:str, scans:dict, num:int, pos_ind:int, feat_ind:int, base:int, method:int, ratio:float, threshold:int) -> int:
+def generate_graphs(data_path:str, f_path:str, scans:dict, num:int, pattern:Tuple[int], pos_ind:int, feat_ind:int, base:int, method:int, ratio:float, threshold:int) -> int:
     '''
     Generate graphs for given scans, and write them onto the given .txt file
 
@@ -276,6 +288,7 @@ def generate_graphs(data_path:str, f_path:str, scans:dict, num:int, pos_ind:int,
         f_path: the path of the .txt file we want to write on
         scans: the dictionary[scan,label] contains all the scans, for which we want to generate graphs
         num: number of graphs to generate for each scan
+        pattern: which pattern to follow to generate graph
         pos_ind: see @grakit.load_object_vertex
         feat_ind: see @grakit.load_object_vertex
         base: see @grakit.generate_edge
@@ -305,12 +318,40 @@ def generate_graphs(data_path:str, f_path:str, scans:dict, num:int, pos_ind:int,
         # then get emb vertex
         emb_v = grakit.load_emb_vertex(emb_info)
 
+        set = pattern[0]
+        part = pattern[1]
         for j in range(num):
-            sample_obj_v = random.sample(obj_v, min(len(obj_v), random.randint(4, 6)))
-            sample_emb_v = random.sample(emb_v, min(len(emb_v), random.randint(4, 6)))
-            # sample_v = sample_obj_v + sample_emb_v
-            # sample_v = sample_emb_v
-            sample_v = sample_obj_v
+            if set == 0: # prototype
+                sample_obj_v = random.sample(obj_v, random.randint(0, len(obj_v)))
+                sample_emb_v = random.sample(emb_v, random.randint(0, len(emb_v)))
+            elif set == 1: # all
+                sample_obj_v = obj_v
+                sample_emb_v = emb_v
+            elif set == 2:
+                sample_obj_v = random.sample(obj_v, min(len(obj_v), random.randint(2, 4)))
+                sample_emb_v = random.sample(emb_v, min(len(emb_v), random.randint(2, 4)))
+            elif set == 3:
+                sample_obj_v = random.sample(obj_v, min(len(obj_v), random.randint(6, 8)))
+                sample_emb_v = random.sample(emb_v, min(len(emb_v), random.randint(6, 8)))
+            elif set == 4:
+                sample_obj_v = random.sample(obj_v, min(len(obj_v), random.randint(10, 12)))
+                sample_emb_v = random.sample(emb_v, min(len(emb_v), random.randint(10, 12)))
+            elif set == 5:
+                sample_obj_v = random.sample(obj_v, min(len(obj_v), random.randint(14, 16)))
+                sample_emb_v = random.sample(emb_v, min(len(emb_v), random.randint(14, 16)))
+            elif set == 6:
+                sample_obj_v = random.sample(obj_v, min(len(obj_v), random.randint(18, 20)))
+                sample_emb_v = random.sample(emb_v, min(len(emb_v), random.randint(18, 20)))
+            elif set == 7:
+                sample_obj_v = random.sample(obj_v, min(len(obj_v), random.randint(22, 24)))
+                sample_emb_v = random.sample(emb_v, min(len(emb_v), random.randint(22, 24)))
+                
+            if part == 0: # obj & emb
+                sample_v = sample_obj_v + sample_emb_v
+            elif part == 1: # No obj
+                sample_v = sample_emb_v
+            elif part == 2: # No emb
+                sample_v = sample_obj_v
 
             if len(sample_v) == 0: continue
 
@@ -326,6 +367,7 @@ def generate_graphs(data_path:str, f_path:str, scans:dict, num:int, pos_ind:int,
                 feat = " ".join(map(str, v.feat.numpy()))
                 if tag == "0": # emb, so pad for obj
                     obj_pad = " ".join(map(str, np.zeros(num_class)))
+                    # obj_pad = " ".join(map(str, np.zeros(64)))
                     f.write(" ".join([tag, str(deg_lst[i]), nbs, feat, obj_pad]) + '\n')
                 elif tag == "1": # obj, so pad for emb
                     emb_pad = " ".join(map(str, np.zeros(64)))
@@ -335,7 +377,7 @@ def generate_graphs(data_path:str, f_path:str, scans:dict, num:int, pos_ind:int,
     return count
     
 
-def build_dataset_combined(mode:int, target_name:str, pos_ind:int, feat_ind:int, base:int, method:int, ratio:float, threshold:int) -> Tuple[int]:
+def build_dataset_train_valid(target_name:str, pos_ind:int, feat_ind:int, base:int, method:int, ratio:float, threshold:int) -> Tuple[int]:
     '''
     Build dataset for DGCNN.
 
@@ -357,7 +399,6 @@ def build_dataset_combined(mode:int, target_name:str, pos_ind:int, feat_ind:int,
     '''
     data_path = '3rscan'
     scan_to_label_train, scan_to_label_valid = generate_labels(path='rooms_cleaned_train.txt', mode=1)
-    scan_to_label_test = generate_labels(path='rooms_cleaned_test.txt', mode=0)
 
     # Initialite the file
     f_path = join('pytorch_DGCNN-master/data', target_name, target_name+'.txt')
@@ -365,28 +406,56 @@ def build_dataset_combined(mode:int, target_name:str, pos_ind:int, feat_ind:int,
     
     # Generate graphs for the training set
     count_train = generate_graphs(data_path=data_path, f_path=f_path, scans=scan_to_label_train, num=10, \
-        pos_ind=pos_ind, feat_ind=feat_ind, base=base, method=method, ratio=ratio, threshold=threshold)
+        pattern=(0,0), pos_ind=pos_ind, feat_ind=feat_ind, base=base, method=method, ratio=ratio, threshold=threshold)
 
-    # Generate graphs for the validation/test set
-    if mode == 0:
-        # for validation set
-        count_rest = generate_graphs(data_path=data_path, f_path=f_path, scans=scan_to_label_valid, num=5, \
-            pos_ind=pos_ind, feat_ind=feat_ind, base=base, method=method, ratio=ratio, threshold=threshold)
-    elif mode == 1:
-        # for test set
-        count_rest = generate_graphs(data_path=data_path, f_path=f_path, scans=scan_to_label_test, num=5, \
-            pos_ind=pos_ind, feat_ind=feat_ind, base=base, method=method, ratio=ratio, threshold=threshold)
-    else:
-        print('invalid mode')
-        return None
+    # Generate graphs for the validation
+    count_valid = generate_graphs(data_path=data_path, f_path=f_path, scans=scan_to_label_valid, num=5, \
+        pattern=(0,0), pos_ind=pos_ind, feat_ind=feat_ind, base=base, method=method, ratio=ratio, threshold=threshold)
 
     # Conclude the file
     with open(f_path, 'r+') as f:
         content = f.read()
         f.seek(0, 0)
-        f.write(str(count_train + count_rest) + '\n' + content)
+        f.write(str(count_train + count_valid) + '\n' + content)
     
-    return count_train, count_rest
+    return count_train, count_valid
+
+
+def build_dataset_test(pattern:Tuple[int], pos_ind:int, feat_ind:int, base:int, method:int, ratio:float, threshold:int) -> Tuple[int]:
+    '''
+    Build test set for DGCNN.
+
+    Parameters:
+        rooms_path: the path of the .txt file which stores all rooms
+        target_name: the name of the dataset
+        pos_ind: see @grakit.load_object_vertex
+        feat_ind: see @grakit.load_object_vertex
+        base: see @grakit.generate_edge
+        method: see @grakit.generate_edge
+        ratio: see @grakit.generate_edge
+        threshold: only consider objects with frequency >= threshold
+
+    Returns:
+        None
+    '''
+    data_path = '3rscan'
+    scan_to_label_test = generate_labels(path='rooms_cleaned_test.txt', mode=0)
+
+    # Initialite the file
+    f_path = join('experiment_inputs', '{}_{}.txt'.format(pattern[0], pattern[1]))
+    open(f_path, 'w').close()
+    
+    # Generate graphs for the test set
+    count = generate_graphs(data_path=data_path, f_path=f_path, scans=scan_to_label_test, num=5, \
+        pattern=pattern ,pos_ind=pos_ind, feat_ind=feat_ind, base=base, method=method, ratio=ratio, threshold=threshold)
+
+    # Conclude the file
+    with open(f_path, 'r+') as f:
+        content = f.read()
+        f.seek(0, 0)
+        f.write(str(count) + '\n' + content)
+    
+    return count
 
 
 def build_cv_split_10fold(data:str, total_size:int, test_size:int) -> None:
