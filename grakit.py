@@ -63,8 +63,10 @@ def generate_edge(vertices:List[vertex], base:int, method:int, ratio:float) -> n
         if base == 0: # based on pos
             lst = [v.pos for v in vertices]
         else: # based on feat
+            # for v in vertices: print(v.feat.shape)
             lst = [v.feat for v in vertices]
         _matrix = torch.stack(lst)
+        # print('_matrix.shape:', _matrix.shape)
 
         # shape: (num_v, num_v)
         dis_matrix = distance.cdist(_matrix, _matrix, 'euclidean')
