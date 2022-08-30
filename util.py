@@ -251,8 +251,12 @@ def get_object_info_json(path:str, threshold:int) -> Tuple[int, List[Tuple]]:
         number of classes &
         list of information of each object in the .json file
     '''
-    # Change threshold
-    obj_dic = get_object_class(threshold)
+    if threshold == -1:
+        obj_dic = get_object_class_direct()
+        num_of_classes = len(OBJ_OF_INTEREST)
+    else:
+        obj_dic = get_object_class(threshold)
+        num_of_classes = len(obj_dic)
 
     with open(path) as f:
         data = json.load(f)
@@ -272,7 +276,7 @@ def get_object_info_json(path:str, threshold:int) -> Tuple[int, List[Tuple]]:
         obj_info = (pos, label, ignore)
         lst.append(obj_info)
     
-    return len(obj_dic), lst
+    return num_of_classes, lst
 
 
 def get_scan_emb_info(scan:str) -> torch.Tensor:
