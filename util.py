@@ -10,7 +10,7 @@ from os.path import join, isfile
 from tkinter.messagebox import NO
 from typing import List, Tuple, Dict, Union
 import numpy as np
-
+from data import *
 
 
 def get_directories(path:str, print_result=True) -> List[str]:
@@ -198,18 +198,6 @@ def get_object_class(threshold:int) -> dict:
     a = np.array([x for x in range(num_objects_of_interest)])
     one_hots = np.zeros((a.size, a.max()+1))
     one_hots[np.arange(a.size),a] = 1
-
-    # '''added strings by Victoria (in order to pad one-hot vector to 64 dim, which is dim for vlad vectors)'''
-    # one_hots_edited = []
-    # for i in range(one_hots.shape[0]):
-    #     new_arr = one_hots[i].tolist()
-    #     while(len(new_arr)!=64):
-    #         new_arr.append(0)
-    #     one_hots_edited.append(new_arr)
-    # one_hots = np.asarray(one_hots_edited)
-
-    # '''end of added strings'''
-
     one_hots = torch.from_numpy(one_hots).int()
     # print(one_hots)
 
@@ -217,6 +205,36 @@ def get_object_class(threshold:int) -> dict:
     obj_dic = {}
     for i in range(num_objects_of_interest):
         obj_dic[objects_of_interest[i]] = one_hots[i]
+    # print(obj_dic["pillow"])
+    return obj_dic
+
+
+def get_object_class_direct() -> dict:
+    '''
+    Get object-to-class dictionary
+
+    Parameters:
+        threshold: ignore objects with frequency under threshold
+
+    Returns:
+        dictionary where key is the object label and the value is its one-hot class
+    '''
+    # Get objects of interest 
+    num_objects_of_interest = len(OBJ_OF_INTEREST)
+    # print(objects_of_interest, num_objects_of_interest)
+
+    # Construct one-hot vector
+    a = np.array([x for x in range(num_objects_of_interest)])
+    one_hots = np.zeros((a.size, a.max()+1))
+    one_hots[np.arange(a.size),a] = 1
+    one_hots = torch.from_numpy(one_hots).int()
+    # print(one_hots)
+
+    # Associate objects of interest with their one-hot class
+    obj_dic = {}
+    for i, kind in enumerate(OBJ_OF_INTEREST):
+        for obj in kind:
+            obj_dic[obj] = one_hots[i]
     # print(obj_dic["pillow"])
     return obj_dic
 
