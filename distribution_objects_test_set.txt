@@ -1,0 +1,194 @@
+room:1 scan: d7d40d6c-7a5d-2b36-9674-c435fa58a2d1
+{'floor': 1, 'wall': 4, 'picture': 2, 'door': 4, 'stair': 1, 'ceiling': 1, 'bookshelf': 1, 'boxes': 1, 'stand': 1, 'heater': 1, 'commode': 1, 'sewing machine': 1, 'doorframe': 4, 'lamp': 1, 'flowers': 1, 'item': 2}
+room:1 scan: d7d40d6a-7a5d-2b36-954e-6faa597aea5f
+{'picture': 2, 'doorframe': 4, 'door': 4, 'sewing machine': 1, 'stand': 1, 'commode': 1, 'flowers': 1, 'heater': 1, 'item': 2, 'ceiling': 1, 'floor': 1, 'stair': 1, 'wall': 4, 'boxes': 1, 'bookshelf': 1, 'lamp': 1}
+room:1 scan: d7d40d6e-7a5d-2b36-9548-8c19e9b50063
+{'door': 4, 'stair': 1, 'ceiling': 1, 'wall': 4, 'floor': 1, 'doorframe': 4, 'bookshelf': 1, 'boxes': 1, 'item': 2, 'picture': 2, 'sewing machine': 1, 'stand': 1, 'lamp': 1, 'commode': 1, 'flowers': 1, 'heater': 1}
+room:2 scan: d9725be1-7513-2d91-8723-770169ff5b75
+{'wall': 4, 'towel': 2, 'mirror': 1, 'shelf': 2, 'objects': 1, 'toilet paper dispenser': 1, 'floor': 1, 'ceiling': 1, 'light': 1, 'sink': 1, 'shower': 1, 'trash can': 2, 'toilet': 1, 'toilet brush': 1}
+room:2 scan: d9725be3-7513-2d91-853f-22df440e48a3
+{'toilet brush': 1, 'wall': 4, 'shelf': 2, 'sink': 1, 'floor': 1, 'shower': 1, 'trash can': 2, 'towel': 2, 'mirror': 1, 'toilet': 1, 'ceiling': 1, 'objects': 1, 'light': 1, 'toilet paper dispenser': 1}
+room:2 scan: baf0a8f8-26d4-2033-8af4-9d0603924ce1
+{'mirror': 1, 'wall': 4, 'shelf': 2, 'toilet': 1, 'shower': 1, 'ceiling': 1, 'towel': 2, 'objects': 1, 'sink': 1, 'trash can': 2, 'floor': 1, 'light': 1, 'toilet paper dispenser': 1, 'box': 1, 'door': 1, 'doorframe': 1, 'toilet brush': 1}
+room:2 scan: baf0a8fb-26d4-2033-8a28-2001356bbb9a
+{'light': 1, 'sink': 1, 'trash can': 2, 'towel': 2, 'shelf': 2, 'toilet': 1, 'toilet paper dispenser': 1, 'wall': 4, 'shower': 1, 'mirror': 1, 'ceiling': 1, 'floor': 1, 'objects': 1, 'box': 1, 'door': 1, 'doorframe': 1, 'toilet brush': 1}
+room:2 scan: d9725be5-7513-2d91-8518-d324d081f19c
+{'wall': 4, 'sink': 1, 'floor': 1, 'towel': 2, 'shelf': 2, 'mirror': 1, 'objects': 1, 'shower': 1, 'ceiling': 1, 'light': 1, 'toilet': 1, 'trash can': 2, 'toilet paper dispenser': 1, 'toilet brush': 1}
+room:3 scan: dbeb4cee-faf9-2324-991e-79c1f7e0b908
+{'floor': 1, 'sofa': 1, 'couch table': 1, 'armchair': 1, 'wall': 6, 'curtain': 1, 'showcase': 1, 'table': 1, 'commode': 2, 'shelf': 4, 'cabinet': 2, 'tv stand': 1, 'tv': 1, 'chair': 1, 'clock': 1, 'pillow': 7, 'furniture': 1, 'picture': 1, 'plant': 1, 'box': 2, 'decoration': 1, 'trash can': 1}
+room:3 scan: 2451c046-fae8-24f6-91fb-c25185c51c7b
+{'showcase': 1, 'table': 1, 'wall': 4, 'curtain': 1, 'floor': 1, 'commode': 1, 'armchair': 1, 'chair': 1, 'clock': 1, 'pillow': 1, 'trash can': 1}
+room:4 scan: dbeb4d09-faf9-2324-9b85-dabd70dba4d0
+{'floor': 1, 'wall': 6, 'cabinet': 1, 'curtain': 1, 'table': 1, 'chair': 2, 'kitchen cabinet': 4, 'counter': 1, 'cutting board': 1, 'shelf': 1, 'item': 2, 'stove': 1, 'rolling pin': 1, 'sink': 1, 'oven': 1, 'extractor fan': 1, 'lamp': 1, 'items': 1, 'ceiling': 1}
+room:4 scan: 0cac761d-8d6f-2d13-8f35-2364ee20f2a9
+{'kitchen cabinet': 4, 'curtain': 1, 'wall': 6, 'sink': 1, 'floor': 1, 'stove': 1, 'counter': 1, 'item': 1, 'cutting board': 1, 'cabinet': 1, 'rolling pin': 1, 'extractor fan': 1, 'shelf': 1, 'lamp': 1, 'oven': 1, 'table': 1, 'chair': 2, 'items': 1, 'ceiling': 1}
+room:4 scan: 0cac761f-8d6f-2d13-8c29-90f19c5f65c6
+{'table': 1, 'wall': 6, 'extractor fan': 1, 'kitchen cabinet': 4, 'counter': 1, 'stove': 1, 'item': 1, 'lamp': 1, 'oven': 1, 'floor': 1, 'curtain': 1, 'cabinet': 1, 'shelf': 1, 'sink': 1, 'cutting board': 1, 'chair': 2, 'rolling pin': 1, 'items': 1, 'ceiling': 1}
+room:5 scan: dbeb4d1b-faf9-2324-9ac8-cbad7aa51d12
+{'floor': 1, 'wall': 3, 'bed': 1, 'wardrobe': 2, 'table': 1, 'chair': 1, 'commode': 1, 'shelf': 4, 'box': 2, 'monitor': 1, 'lamp': 1, 'item': 2, 'pillow': 2, 'stuffed animal': 1, 'table lamp': 1, 'ceiling': 1, 'light': 1, 'rug': 2, 'blanket': 1}
+room:5 scan: 0cac765e-8d6f-2d13-8d01-8f28e99c016c
+{'pillow': 2, 'bed': 1, 'shelf': 4, 'commode': 1, 'wall': 4, 'wardrobe': 2, 'item': 2, 'lamp': 1, 'floor': 1, 'table': 1, 'monitor': 1, 'box': 2, 'chair': 1, 'table lamp': 1, 'rug': 3, 'ceiling': 1, 'blanket': 1, 'stuffed animal': 1}
+room:5 scan: 0cac7660-8d6f-2d13-8ecb-3e29d78a7718
+{'shelf': 4, 'wall': 4, 'wardrobe': 2, 'commode': 1, 'floor': 1, 'monitor': 1, 'item': 2, 'bed': 1, 'table': 1, 'pillow': 2, 'stuffed animal': 1, 'box': 2, 'chair': 1, 'ceiling': 1, 'rug': 3, 'blanket': 1}
+room:6 scan: dc42b37a-8d5c-2d2a-84dd-83aff10e0abe
+{'floor': 1, 'stairs': 1, 'wall': 6, 'picture': 2, 'armchair': 6, 'table': 3, 'plant': 3, 'blinds': 7, 'window': 3, 'curtain': 1, 'door': 1, 'bar': 1, 'ceiling': 1, 'desk': 1, 'monitor': 1, 'chair': 2, 'decoration': 1, 'kids bicycle': 1, 'box': 1, 'clutter': 1, 'stool': 1, 'menu': 1, 'object': 1, 'cabinet': 1}
+room:6 scan: 0cac754d-8d6f-2d13-8c81-d134a19b0045
+{'picture': 1, 'ceiling': 2, 'floor': 1, 'armchair': 2, 'wall': 2, 'clutter': 1, 'window': 1, 'decoration': 1, 'kids bicycle': 1, 'table': 1, 'monitor': 1, 'box': 1, 'plant': 1, 'door': 1, 'chair': 1, 'desk': 1}
+room:7 scan: ddc73797-765b-241a-9e2c-097c5989baf6
+{'shelf': 7, 'box': 2, 'plant': 2, 'decoration': 4, 'cushion': 10, 'monitor': 1, 'floor': 1, 'wall': 3, 'curtain': 2, 'window': 1, 'table': 1, 'bench': 1, 'chair': 3, 'sofa': 1, 'couch table': 1, 'side table': 3, 'desk': 1, 'cabinet': 5, 'tv stand': 1, 'stool': 2, 'ceiling': 1, 'stand': 1, 'lamp': 1, 'cart': 1, 'tv': 1, 'clock': 1}
+room:7 scan: 2451c048-fae8-24f6-9043-f1604dbada2c
+{'floor': 1, 'chair': 2, 'table': 1, 'window': 1, 'sofa': 1, 'monitor': 1, 'couch table': 1, 'desk': 1, 'pillow': 2, 'cushion': 8, 'side table': 2, 'decoration': 1, 'cabinet': 2, 'box': 1, 'blanket': 1, 'tv stand': 1}
+room:7 scan: ddc7379b-765b-241a-9f45-c37e41608726
+{'wall': 2, 'shelf': 1, 'sofa': 1, 'desk': 1, 'decoration': 2, 'floor': 1, 'ceiling': 1, 'cabinet': 3, 'box': 1, 'curtain': 2, 'window': 1, 'table': 1, 'plant': 1, 'stool': 2, 'stand': 1, 'chair': 3, 'lamp': 1, 'couch table': 1, 'monitor': 1, 'cushion': 1, 'bench': 1}
+room:7 scan: ddc73799-765b-241a-9c30-f75dcb7627d4
+{'window': 1, 'ceiling': 1, 'floor': 1, 'curtain': 2, 'wall': 2, 'stand': 1, 'cabinet': 1, 'table': 1, 'bench': 1, 'decoration': 2, 'shelf': 1, 'chair': 2, 'lamp': 1}
+room:7 scan: 0cac75b7-8d6f-2d13-8cb2-0b4e06913140
+{'couch table': 1, 'shelf': 7, 'sofa': 1, 'floor': 1, 'stool': 2, 'desk': 1, 'chair': 3, 'lamp': 1, 'wall': 3, 'commode': 1, 'ceiling': 1, 'curtain': 2, 'plant': 2, 'window': 1, 'side table': 3, 'box': 2, 'tv stand': 1, 'cart': 1, 'decoration': 2, 'pillow': 6, 'monitor': 1, 'bench': 1, 'table': 1, 'stand': 1, 'cabinet': 1, 'tv': 1, 'boxes': 1}
+room:7 scan: c7895f07-339c-2d13-8176-7418b6e8d7ce
+{'shelf': 7, 'wall': 3, 'ceiling': 1, 'sofa': 1, 'tv stand': 1, 'stool': 2, 'desk': 1, 'cabinet': 4, 'floor': 1, 'chair': 3, 'couch table': 1, 'lamp': 1, 'table': 1, 'curtain': 2, 'plant': 2, 'window': 1, 'cushion': 12, 'bench': 1, 'stand': 1, 'box': 1, 'commode': 1, 'armchair': 1, 'tv': 1, 'decoration': 1, 'monitor': 1, 'clock': 1}
+room:8 scan: ddc737a5-765b-241a-9cd2-c6e7a89aa43d
+{'nightstand': 2, 'wall': 6, 'table': 1, 'stool': 1, 'floor': 1, 'chair': 1, 'wardrobe': 1, 'bed': 1, 'ceiling': 1, 'air conditioner': 1, 'shelf': 5, 'lamp': 3, 'item': 1, 'pillow': 2, 'blanket': 1, 'towel': 3}
+room:8 scan: ddc737a3-765b-241a-9c99-f98a3c126686
+{'wall': 5, 'wardrobe': 1, 'shelf': 4, 'ceiling': 1, 'nightstand': 2, 'chair': 1, 'table': 1, 'stool': 1, 'lamp': 2, 'pillow': 2, 'air conditioner': 1, 'item': 1, 'blanket': 1, 'floor': 1, 'bed': 1}
+room:9 scan: ddc737a7-765b-241a-9f27-0958b929deb5
+{'floor': 1, 'wall': 9, 'bench': 1, 'pillow': 3, 'door': 1, 'picture': 1, 'item': 2, 'commode': 1, 'cupboard': 2, 'shelf': 4, 'ceiling': 1, 'mirror': 1, 'cabinet': 1, 'trash can': 2, 'light': 1, 'object': 1, 'carpet': 1}
+room:9 scan: ddc737a9-765b-241a-9dd7-bf14079f4804
+{'wall': 8, 'cupboard': 2, 'floor': 1, 'cabinet': 1, 'commode': 1, 'item': 1, 'trash can': 1, 'picture': 1, 'shelf': 2, 'pillow': 2, 'bench': 1, 'door': 1, 'carpet': 1, 'mirror': 1}
+room:9 scan: ddc737ab-765b-241a-9c5d-cf3cd8838f28
+{'floor': 1, 'cabinet': 1, 'pillow': 3, 'wall': 6, 'shelf': 2, 'bench': 1, 'cupboard': 1, 'door': 1, 'carpet': 1, 'ceiling': 1}
+room:10 scan: ddc737ad-765b-241a-9d9f-1f19fab18318
+{'floor': 1, 'wall': 6, 'commode': 2, 'wardrobe': 1, 'bin': 1, 'box': 2, 'clothes': 1, 'ceiling': 1, 'shelf': 1, 'basket': 1, 'object': 2, 'clothes dryer': 1, 'mop': 1}
+room:10 scan: ddc737af-765b-241a-9ea5-0a02dc0876f2
+{'clothes dryer': 1, 'wardrobe': 1, 'shelf': 1, 'box': 2, 'commode': 2, 'wall': 5, 'basket': 1, 'floor': 1, 'bin': 1, 'mop': 1}
+room:11 scan: ddc737b1-765b-241a-9c21-a4e2674b2853
+{'floor': 1, 'curtain': 2, 'wall': 9, 'chair': 4, 'table': 1, 'bench': 1, 'kitchen cabinet': 2, 'kitchen counter': 1, 'commode': 1, 'shelf': 7, 'box': 2, 'ceiling': 1, 'flower': 1, 'item': 2, 'extractor fan': 1, 'pillow': 1, 'books': 1, 'towel': 1, 'stove': 1, 'picture': 1, 'items': 2, 'sink': 1}
+room:11 scan: b05fdd5a-fca0-2d4f-89fd-d54bd26a115b
+{'wall': 5, 'floor': 1, 'commode': 1, 'picture': 1, 'kitchen cabinet': 2, 'shelf': 7, 'towel': 1, 'kitchen counter': 1, 'ceiling': 1, 'curtain': 1, 'box': 2, 'extractor fan': 1, 'stove': 1, 'items': 2, 'chair': 2, 'oven': 1, 'sink': 1}
+room:11 scan: b05fdd58-fca0-2d4f-8bd7-e80abe1ddb4c
+{'kitchen cabinet': 2, 'kitchen counter': 1, 'curtain': 1, 'wall': 4, 'item': 1, 'pillow': 1, 'floor': 1, 'table': 1, 'lamp': 1, 'chair': 2, 'bench': 1}
+room:11 scan: ddc737b3-765b-241a-9c35-6b7662c04fc9
+{'stove': 1, 'wall': 9, 'shelf': 7, 'items': 2, 'kitchen cabinet': 2, 'curtain': 2, 'chair': 4, 'lamp': 1, 'item': 2, 'oven': 1, 'sink': 1, 'bench': 1, 'box': 2, 'towel': 1, 'flower': 1, 'table': 1, 'picture': 1, 'pillow': 1, 'floor': 1, 'ceiling': 1, 'commode': 1, 'extractor fan': 1, 'kitchen counter': 1}
+room:11 scan: ddc737b5-765b-241a-9efa-a3356768562d
+{'floor': 1, 'kitchen counter': 1, 'shelf': 7, 'curtain': 2, 'wall': 9, 'ceiling': 1, 'box': 1, 'items': 2, 'kitchen cabinet': 2, 'chair': 4, 'commode': 1, 'bench': 1, 'item': 2, 'picture': 1, 'extractor fan': 1, 'table': 1, 'towel': 1, 'flower': 1, 'pillow': 1, 'stove': 1, 'oven': 1, 'sink': 1}
+room:12 scan: def7fbc1-48c2-2895-91d9-cb5e6f3e3589
+{'floor': 1, 'wall': 4, 'washing machine': 1, 'kitchen cabinet': 4, 'kitchen counter': 2, 'microwave': 1, 'window': 1, 'heater': 1, 'ceiling': 1, 'shelf': 1, 'food': 1, 'dishes': 1, 'stove': 1, 'coffee machine': 1, 'kitchen rack': 1, 'paper towel': 1, 'basket': 1, 'kitchen appliance': 2, 'squeezer': 1, 'apron': 1, 'clutter': 3, 'door': 1, 'oven': 1, 'package': 1, 'refrigerator': 1}
+room:12 scan: def7fbb9-48c2-2895-9249-16ce01ca2e59
+{'kitchen cabinet': 4, 'clutter': 3, 'kitchen rack': 1, 'floor': 1, 'refrigerator': 1, 'heater': 1, 'coffee machine': 1, 'wall': 4, 'kitchen counter': 2, 'kitchen appliance': 2, 'basket': 1, 'food': 1, 'window': 1, 'squeezer': 1, 'microwave': 1, 'door': 1, 'apron': 1, 'dishes': 1, 'paper towel': 1, 'washing machine': 1, 'oven': 1, 'shelf': 1, 'stove': 1, 'ceiling': 1, 'package': 1}
+room:13 scan: e3004a81-9f2a-2778-874e-fa76b0e67096
+{'backpack': 3, 'item': 2, 'floor': 1, 'wall': 4, 'curtain': 2, 'window': 1, 'bed': 2, 'sofa': 2, 'chair': 2, 'wardrobe': 1, 'bookshelf': 1, 'desk': 2, 'coffee table': 1, 'trash can': 1, 'clothes': 3, 'picture': 3, 'shelf': 2, 'shoes': 2, 'carpet': 2, 'drawer': 1, 'commode': 1, 'pillow': 6, 'calendar': 1, 'book': 1, 'ceiling': 1, 'blanket': 3, 'organizer': 1}
+room:13 scan: 8e0f1c53-9e28-2339-8588-2b24d9e9f3e8
+{'picture': 3, 'clothes': 3, 'pillow': 4, 'shoes': 2, 'blanket': 3, 'wall': 4, 'window': 1, 'floor': 1, 'curtain': 2, 'carpet': 2, 'ceiling': 1, 'sofa': 2, 'chair': 2, 'backpack': 3, 'desk': 2, 'wardrobe': 1, 'coffee table': 1, 'shelf': 2, 'item': 2, 'calendar': 1, 'book': 1, 'bed': 2, 'trash can': 1, 'organizer': 1, 'drawer': 1, 'bookshelf': 1}
+room:14 scan: e44d238f-52a2-2879-88ec-e383a4d9abf3
+{'monitor': 1, 'table': 1, 'chair': 2, 'wall': 12, 'kitchen counter': 1, 'side table': 1, 'box': 5, 'kitchen cabinet': 2, 'microwave': 1, 'bag': 3, 'sink': 1, 'lamp': 2, 'backpack': 1, 'clothes': 1, 'pillow': 1, 'blanket': 1, 'ceiling': 1, 'shoes': 1, 'floor': 1, 'door': 2, 'doorframe': 3, 'blinds': 2, 'heater': 1, 'wardrobe': 1, 'bed': 1, 'nightstand': 1, 'computer desk': 1, 'paper': 1}
+room:14 scan: e44d238c-52a2-2879-89d9-a29ba04436e0
+{'side table': 1, 'ceiling': 1, 'floor': 1, 'box': 5, 'wall': 11, 'kitchen cabinet': 2, 'kitchen counter': 1, 'backpack': 1, 'computer desk': 1, 'doorframe': 3, 'door': 2, 'bed': 1, 'nightstand': 1, 'heater': 1, 'blinds': 2, 'table': 1, 'shoes': 1, 'pillow': 1, 'wardrobe': 1, 'blanket': 1, 'chair': 2, 'lamp': 2, 'monitor': 1, 'clothes': 1, 'paper': 1}
+room:15 scan: e48c48f4-8b2f-2858-88c2-fd5e4c33f5b8
+{'floor': 1, 'wall': 4, 'wardrobe': 1, 'shelf': 1, 'window': 1, 'curtain': 1, 'ceiling': 1, 'heater': 1, 'desk': 1, 'chair': 2, 'bed': 1, 'nightstand': 1, 'suitcase': 2, 'armchair': 1, 'bag': 3, 'trash can': 1, 'laptop': 1, 'frame': 1, 'item': 2, 'lamp': 2, 'box': 1, 'kettle': 1, 'blanket': 2, 'backpack': 1}
+room:15 scan: e48c48f8-8b2f-2858-89d1-36e9b49a06b0
+{'suitcase': 2, 'bag': 3, 'floor': 1, 'wall': 4, 'heater': 1, 'shelf': 1, 'trash can': 1, 'window': 1, 'bed': 1, 'wardrobe': 1, 'nightstand': 1, 'ceiling': 1, 'armchair': 1, 'chair': 2, 'desk': 1, 'curtain': 1, 'blanket': 1, 'frame': 1, 'item': 1, 'box': 1, 'kettle': 1, 'lamp': 2, 'backpack': 1}
+room:15 scan: e48c48fb-8b2f-2858-890d-fb49b3db5573
+{'window': 1, 'chair': 2, 'wall': 4, 'ceiling': 1, 'shelf': 1, 'bed': 1, 'wardrobe': 1, 'blanket': 1, 'bag': 3, 'lamp': 1, 'desk': 1, 'laptop': 1, 'armchair': 1, 'curtain': 1, 'suitcase': 2, 'floor': 1, 'nightstand': 1, 'heater': 1, 'box': 1, 'item': 1, 'frame': 1, 'trash can': 1, 'backpack': 1}
+room:16 scan: e61b0e04-bada-2f31-82d6-72831a602ba7
+{'doorframe': 2, 'floor': 1, 'curtain': 1, 'wall': 9, 'clock': 1, 'cabinet': 5, 'counter': 1, 'table': 4, 'heater': 2, 'bookshelf': 1, 'shelf': 1, 'tv': 1, 'closet': 1, 'clothes': 2, 'door': 3, 'frame': 3, 'sofa': 1, 'footstool': 1, 'armchair': 1, 'cushion': 1, 'dining table': 1, 'dining chair': 5, 'stool': 1, 'clutter': 2, 'window': 1, 'ceiling': 5, 'shoes': 1, 'lamp': 1}
+room:16 scan: e61b0e02-bada-2f31-82d0-80fc5c70bd6f
+{'door': 3, 'sofa': 1, 'clothes': 2, 'curtain': 1, 'floor': 1, 'doorframe': 2, 'wall': 10, 'dining table': 1, 'closet': 1, 'dining chair': 5, 'cabinet': 5, 'ceiling': 5, 'clock': 1, 'counter': 1, 'clutter': 1, 'table': 4, 'stool': 1, 'shelf': 1, 'footstool': 1, 'armchair': 1, 'heater': 2, 'frame': 3, 'shoes': 1, 'bookshelf': 1, 'tv': 1, 'lamp': 2, 'bag': 1}
+room:17 scan: ebc42044-82a4-2113-8789-1c8c8bb7cbcd
+{'trash can': 1, 'box': 1, 'telephone': 1, 'ventilation': 1, 'bag': 1, 'doorframe': 1, 'light': 1, 'floor': 1, 'wall': 4, 'ceiling': 1, 'door': 2, 'table': 2, 'shoe shelf': 1, 'shoes': 1}
+room:17 scan: ebc4204c-82a4-2113-85cb-529a884b1629
+{'door': 2, 'telephone': 1, 'wall': 4, 'doorframe': 1, 'ceiling': 1, 'light': 1, 'shoe shelf': 1, 'table': 2, 'ventilation': 1, 'floor': 1, 'box': 1, 'trash can': 1, 'shoes': 1}
+room:17 scan: ebc4204e-82a4-2113-8726-a494a47ce349
+{'wall': 4, 'door': 2, 'table': 2, 'floor': 1, 'ceiling': 1, 'ventilation': 1, 'doorframe': 1, 'shoe shelf': 1, 'item': 1, 'telephone': 1, 'light': 1, 'box': 1}
+room:18 scan: eee5b056-ee2d-28f4-9bbe-f7ddf37895a6
+{'floor': 1, 'bathtub': 1, 'wall': 4, 'door': 1, 'ceiling': 1, 'toilet': 1, 'sink': 2, 'shelf': 3, 'clothes': 1, 'shower curtain': 1, 'heater': 1, 'bath cabinet': 1, 'windowsill': 1, 'counter': 1, 'window': 1, 'item': 1, 'toilet brush': 1, 'pipe': 1, 'towel': 2, 'clock': 1}
+room:18 scan: eee5b052-ee2d-28f4-99fd-c3c5380db25e
+{'wall': 4, 'pipe': 1, 'window': 1, 'bathtub': 1, 'toilet': 1, 'shelf': 3, 'item': 1, 'ceiling': 1, 'door': 1, 'floor': 1, 'bath cabinet': 1, 'sink': 2, 'towel': 2, 'clock': 1, 'counter': 1, 'heater': 1, 'clothes': 1, 'windowsill': 1, 'curtain': 1, 'toilet paper': 1}
+room:19 scan: f38169c7-378c-2a65-8543-3c7481e856fe
+{'pillow': 6, 'blanket': 2, 'bag': 1, 'poster': 1, 'light': 2, 'shoe': 1, 'windowsill': 1, 'side table': 1, 'suitcase': 1, 'shoes': 1, 'floor': 1, 'wall': 7, 'tv': 1, 'curtain': 2, 'window': 1, 'shelf': 1, 'door': 1, 'ceiling': 2, 'bed': 1, 'armchair': 1, 'puf': 1, 'clothes': 1}
+room:19 scan: 0a4b8ef6-a83a-21f2-8672-dce34dd0d7ca
+{'floor': 1, 'wall': 6, 'armchair': 1, 'pillow': 6, 'bed': 1, 'blanket': 2, 'curtain': 2, 'ceiling': 2, 'shelf': 1, 'suitcase': 1, 'clothes': 1, 'door': 1, 'puf': 1, 'tv': 1, 'light': 1, 'poster': 1, 'side table': 1}
+room:19 scan: f38169cf-378c-2a65-855f-05d491a3f26e
+{'side table': 1, 'shelf': 1, 'ceiling': 1, 'wall': 5, 'light': 2, 'poster': 1, 'pillow': 6, 'puf': 1, 'armchair': 1, 'suitcase': 1, 'windowsill': 1, 'floor': 1, 'blanket': 2, 'bed': 1, 'curtain': 2, 'window': 1}
+room:20 scan: f4f31600-8408-2255-971c-b8c20605563a
+{'ceiling': 1, 'wall': 4, 'curtain': 1, 'tv': 1, 'tv stand': 1, 'wardrobe': 1, 'commode': 1, 'floor': 1, 'nightstand': 2, 'table lamp': 2, 'bed': 1, 'cabinet': 1, 'door': 1, 'clothes': 3, 'drawer': 1, 'pillow': 2, 'blanket': 3, 'bag': 2, 'item': 2, 'box': 2, 'stuffed animal': 1, 'statue': 1, 'doorframe': 1, 'carpet': 1}
+room:20 scan: 1d2f851a-d757-207c-8faa-3625b6dda1e5
+{'ceiling': 1, 'wall': 4, 'drawer': 1, 'floor': 1, 'bed': 1, 'curtain': 1, 'wardrobe': 1, 'clothes': 3, 'doorframe': 1, 'tv': 1, 'tv stand': 1, 'blanket': 3, 'item': 2, 'cabinet': 1, 'pillow': 3, 'nightstand': 2, 'commode': 1, 'door': 1, 'bag': 1, 'table lamp': 2, 'box': 2, 'stuffed animal': 1, 'statue': 1, 'stairs': 1, 'basket': 1, 'window frame': 1, 'window': 1, 'shirt': 1, 'windowsill': 1}
+room:20 scan: 10b1796b-3938-2467-88bc-c224c21bc91c
+{'ceiling': 1, 'floor': 1, 'wall': 4, 'door': 1, 'bag': 1, 'item': 2, 'commode': 1, 'wardrobe': 1, 'doorframe': 1, 'clothes': 3, 'statue': 1, 'nightstand': 2, 'pillow': 1, 'bed': 1, 'blanket': 2, 'stuffed animal': 1, 'cabinet': 1, 'curtain': 1, 'box': 2, 'tv stand': 1, 'table lamp': 2, 'window': 1, 'windowsill': 1, 'window frame': 1, 'object': 1}
+room:21 scan: f62fd5f4-9a3f-2f44-8b81-246b93170189
+{'curtain': 5, 'ceiling': 1, 'wall': 5, 'floor': 1, 'sofa': 1, 'armchair': 1, 'couch table': 1, 'shelf': 6, 'window': 1, 'table': 1, 'chair': 6, 'cabinet': 1, 'windowsill': 1, 'lamp': 3, 'flower': 1, 'pillow': 7}
+room:21 scan: 87e6cf6b-9d1a-289f-866c-b90904d9487d
+{'sofa': 1, 'wall': 5, 'armchair': 1, 'chair': 6, 'pillow': 7, 'flower': 1, 'table': 1, 'curtain': 5, 'window': 1, 'windowsill': 1, 'couch table': 1, 'lamp': 2, 'floor': 1, 'shelf': 7, 'cabinet': 1, 'ceiling': 1}
+room:21 scan: a090600c-66f7-2272-9d26-5a98b70d30c5
+{'shelf': 5, 'curtain': 5, 'floor': 1, 'armchair': 1, 'wall': 5, 'sofa': 1, 'cabinet': 1, 'table': 1, 'pillow': 10, 'chair': 6, 'couch table': 1, 'windowsill': 1, 'lamp': 1, 'showcase': 2, 'ceiling': 1, 'backpack': 1, 'tray': 1}
+room:22 scan: f62fd5f8-9a3f-2f44-8b1e-1289a3a61e26
+{'shelf': 5, 'item': 2, 'pan': 1, 'backpack': 2, 'lamp': 1, 'plant': 3, 'ceiling': 1, 'floor': 1, 'wall': 6, 'table': 1, 'chair': 8, 'bench': 1, 'curtain': 2, 'window': 1, 'clothes': 1, 'laundry basket': 1, 'doorframe': 1, 'box': 1}
+room:22 scan: 20c9939d-698f-29c5-85c6-3c618e00061f
+{'item': 1, 'ceiling': 1, 'plant': 3, 'lamp': 1, 'wall': 6, 'stool': 1, 'table': 1, 'clothes': 2, 'chair': 8, 'floor': 1, 'curtain': 2, 'doorframe': 1, 'laundry basket': 1, 'window': 1, 'bench': 1, 'shelf': 3, 'drying rack': 1, 'desk': 1}
+room:22 scan: 20c9939f-698f-29c5-86fa-653fe33ff6fc
+{'wall': 5, 'bench': 1, 'floor': 1, 'curtain': 1, 'window': 1, 'table': 1, 'desk': 1, 'plant': 2, 'ceiling': 1, 'chair': 6, 'laundry basket': 1, 'clothes': 1, 'backpack': 1, 'stool': 1, 'drying rack': 1}
+room:23 scan: f62fd5fd-9a3f-2f44-883a-1e5cf819608e
+{'chair': 7, 'kitchen cabinet': 1, 'kitchen counter': 1, 'wall': 7, 'floor': 1, 'sofa': 1, 'sofa couch': 1, 'blinds': 4, 'table': 1, 'cabinet': 6, 'curtain': 4, 'lamp': 5, 'plant': 2, 'stool': 2, 'tv': 1, 'pillow': 9, 'item': 2, 'sink': 1, 'box': 1, 'book': 1, 'knife box': 1, 'pepper': 1}
+room:23 scan: 74ef8470-9dce-2d66-8339-4b51b8406cef
+{'wall': 4, 'floor': 1, 'cabinet': 3, 'plant': 2, 'curtain': 2, 'kitchen counter': 1, 'book': 1, 'sink': 1, 'chair': 7, 'stool': 1, 'box': 1, 'knife box': 1, 'table': 1, 'item': 2, 'pepper': 1, 'lamp': 6, 'blinds': 2, 'ceiling': 1, 'kitchen cabinet': 1}
+room:23 scan: 74ef8474-9dce-2d66-82e5-309429937089
+{'lamp': 3, 'wall': 3, 'stool': 1, 'floor': 1, 'sofa': 1, 'cabinet': 5, 'pillow': 9, 'chair': 3, 'blinds': 2, 'sofa couch': 1, 'table': 1, 'tv': 1, 'curtain': 1, 'ceiling': 1}
+room:23 scan: 20c993a5-698f-29c5-8565-40e064af0fc4
+{'wall': 3, 'sink': 1, 'kitchen counter': 1, 'kitchen cabinet': 1, 'plant': 1, 'cabinet': 2, 'floor': 1, 'table': 1, 'chair': 4, 'curtain': 2, 'book': 1, 'pepper': 1, 'knife box': 1, 'item': 2, 'blinds': 2, 'stool': 1, 'lamp': 1}
+room:24 scan: f62fd5ff-9a3f-2f44-894c-462b3997d695
+{'floor': 1, 'kitchen cabinet': 2, 'kitchen counter': 2, 'sink': 1, 'wall': 7, 'curtain': 2, 'window': 1, 'table': 1, 'chair': 1, 'stepladder': 1, 'ceiling': 2, 'poster': 1, 'wardrobe': 1, 'lamp': 3, 'organizer': 1, 'kitchen hood': 1, 'bottle': 3, 'pot': 2, 'cut board': 1, 'plant': 2, 'kitchen rack': 2, 'shelf': 3, 'vase': 1, 'picture': 3, 'kitchen towel': 1, 'clock': 1}
+room:24 scan: 352e9c55-69fb-27a7-8bac-3b46e5b77c10
+{'ceiling': 1, 'wall': 7, 'clock': 1, 'plant': 2, 'wardrobe': 1, 'kitchen cabinet': 2, 'kitchen rack': 2, 'poster': 1, 'floor': 1, 'kitchen hood': 1, 'stepladder': 1, 'table': 1, 'sink': 1, 'pot': 2, 'kitchen counter': 2, 'cut board': 1, 'shelf': 3, 'vase': 1, 'lamp': 3, 'curtain': 2, 'bottle': 3, 'chair': 2, 'picture': 3, 'window': 1, 'organizer': 1}
+room:25 scan: fcf66d7b-622d-291c-86b8-7db96aebcee3
+{'clutter': 1, 'cleanser': 1, 'windowsill': 1, 'box': 2, 'bathtub': 1, 'sink': 1, 'wall': 5, 'washing machine': 2, 'window': 1, 'ceiling': 1, 'clothes': 2, 'floor': 1, 'cabinet': 1, 'washing powder': 1}
+room:25 scan: 787ed58c-9d98-2c97-83b9-b48a609ace15
+{'box': 2, 'wall': 5, 'windowsill': 1, 'window': 1, 'bathtub': 1, 'floor': 1, 'washing machine': 2, 'clothes': 2, 'cabinet': 1, 'clutter': 1, 'cleanser': 1, 'ceiling': 1, 'sink': 1, 'backpack': 1, 'suitcase': 1}
+room:26 scan: fcf66d94-622d-291c-85fc-284b68d64c81
+{'floor': 1, 'wall': 5, 'ceiling': 2, 'shelf': 2, 'dining table': 1, 'dining chair': 4, 'kitchen cabinet': 2, 'kitchen counter': 1, 'trash can': 1, 'oven': 1, 'sink': 1, 'stove': 1, 'plate': 1, 'item': 2, 'pan': 1}
+room:26 scan: fcf66d98-622d-291c-851a-a16c117a91bb
+{'wall': 2, 'floor': 1, 'kitchen cabinet': 2, 'shelf': 3, 'dining table': 1, 'ceiling': 1, 'stove': 1, 'kitchen counter': 1, 'oven': 1, 'trash can': 1, 'pan': 1, 'sink': 1, 'dining chair': 1, 'chair': 2, 'item': 1, 'sofa': 1, 'coffee table': 1, 'table': 1}
+room:26 scan: fcf66d96-622d-291c-842c-836d61a13779
+{'oven': 1, 'floor': 1, 'kitchen cabinet': 2, 'wall': 5, 'kitchen counter': 1, 'sink': 1, 'stove': 1, 'pan': 1, 'ceiling': 2, 'item': 1, 'shelf': 2, 'dining table': 1, 'chair': 3, 'trash can': 1, 'dining chair': 1}
+room:26 scan: fcf66d82-622d-291c-87be-78d421381146
+{'chair': 3, 'plate': 1, 'sofa': 1, 'shelf': 3, 'item': 3, 'floor': 1, 'oven': 1, 'wall': 5, 'dining table': 1, 'ceiling': 2, 'trash can': 1, 'kitchen cabinet': 2, 'stove': 1, 'kitchen counter': 1, 'sink': 1, 'pan': 1}
+room:27 scan: fcf66da6-622d-291c-8685-46cd96a8af4e
+{'floor': 1, 'wardrobe': 2, 'table': 1, 'armchair': 1, 'wall': 5, 'window': 2, 'door': 1, 'ceiling': 1, 'shelf': 2, 'radiator': 2, 'chair': 4, 'windowsill': 2, 'telephone': 1, 'box': 21, 'armor': 1}
+room:27 scan: fcf66da8-622d-291c-8565-c44cf20e39b9
+{'shelf': 2, 'box': 19, 'armor': 1, 'chair': 4, 'table': 1, 'wall': 5, 'windowsill': 2, 'ceiling': 1, 'floor': 1, 'window': 2, 'wardrobe': 2, 'radiator': 2, 'armchair': 1, 'telephone': 1}
+room:27 scan: fcf66da4-622d-291c-8642-c11ea83a329c
+{'shelf': 2, 'box': 25, 'table': 1, 'telephone': 1, 'chair': 4, 'wall': 5, 'floor': 1, 'ceiling': 1, 'armor': 1, 'window': 2, 'wardrobe': 2, 'radiator': 2, 'windowsill': 2, 'armchair': 1, 'door': 1}
+room:27 scan: 170725d4-9f1b-2d87-812a-b126916caa9f
+{'box': 23, 'table': 1, 'chair': 4, 'telephone': 1, 'shelf': 2, 'armchair': 1, 'door': 1, 'window': 2, 'wall': 5, 'radiator': 2, 'floor': 1, 'armor': 1, 'windowsill': 2, 'ceiling': 1, 'wardrobe': 2}
+room:27 scan: 170725d2-9f1b-2d87-803b-c3210c0d30ff
+{'wardrobe': 2, 'windowsill': 1, 'floor': 1, 'wall': 4, 'table': 1, 'chair': 3, 'box': 5, 'shelf': 2, 'telephone': 1, 'door': 1, 'ceiling': 1, 'window': 1, 'radiator': 1}
+room:28 scan: fcf66daa-622d-291c-8548-a1163ee299b4
+{'floor': 1, 'wall': 10, 'ceiling': 1, 'cabinet': 3, 'sink': 1, 'stove': 1, 'counter': 2, 'object': 9, 'shelf': 1, 'microwave': 1, 'barstool': 2, 'door': 1, 'recycle bin': 1, 'box': 1, 'whiteboard': 1}
+room:28 scan: 787ed58a-9d98-2c97-826e-8e98355c30d7
+{'cabinet': 3, 'wall': 7, 'stove': 1, 'floor': 1, 'sink': 1, 'door': 3, 'ceiling': 1, 'object': 5, 'microwave': 1, 'shelf': 1, 'recycle bin': 1, 'counter': 2, 'barstool': 1}
+room:28 scan: 787ed580-9d98-2c97-8167-6d3b445da2c0
+{'microwave': 1, 'wall': 9, 'counter': 2, 'object': 8, 'cabinet': 3, 'floor': 1, 'ceiling': 1, 'door': 1, 'sink': 1, 'stove': 1, 'recycle bin': 1, 'barstool': 2, 'box': 1, 'shelf': 1}
+room:28 scan: fcf66d7d-622d-291c-8542-f708b096b45f
+{'barstool': 2, 'object': 5, 'wall': 6, 'stove': 1, 'cabinet': 3, 'ceiling': 1, 'counter': 2, 'floor': 1, 'microwave': 1, 'sink': 1, 'shelf': 1, 'box': 1, 'recycle bin': 1, 'door': 3, 'light': 1, 'doorframe': 1}
+room:29 scan: fcf66dac-622d-291c-8542-d108fb4a91f5
+{'window': 1, 'plant': 3, 'ceiling': 1, 'bath cabinet': 1, 'vacuum': 1, 'mirror': 1, 'object': 2, 'trash can': 1, 'toilet': 1, 'sink': 1, 'towel': 1, 'toilet paper': 1, 'wall': 5, 'floor': 1, 'door': 1, 'clutter': 1, 'heater': 1}
+room:29 scan: fcf66db0-622d-291c-8734-2a41fae7deb2
+{'window': 1, 'wall': 3, 'toilet paper': 1, 'object': 1, 'floor': 1, 'heater': 1, 'plant': 2, 'toilet': 1, 'bath cabinet': 1, 'trash can': 1}
+room:29 scan: fcf66dae-622d-291c-862d-dc03f6f1d562
+{'wall': 5, 'sink': 1, 'window': 1, 'towel': 1, 'floor': 1, 'door': 1, 'bath cabinet': 1, 'object': 2, 'plant': 2, 'toilet paper': 1, 'toilet': 1, 'heater': 1, 'ceiling': 1, 'trash can': 1}
+room:30 scan: fcf66db2-622d-291c-8493-4f2517282f3f
+{'floor': 1, 'wall': 6, 'ceiling': 1, 'window': 3, 'shelf': 7, 'door': 1, 'box': 22, 'radiator': 1, 'chair': 1, 'table': 1, 'windowsill': 2, 'light': 3, 'organizer': 1}
+room:30 scan: fcf66db8-622d-291c-8502-863b391b9ef1
+{'box': 17, 'shelf': 5, 'chair': 1, 'table': 1, 'window': 2, 'wall': 5, 'ceiling': 1, 'floor': 1, 'radiator': 1, 'windowsill': 1}
+room:30 scan: fcf66db6-622d-291c-8740-9e40c21de689
+{'window': 2, 'box': 14, 'wall': 5, 'shelf': 5, 'ceiling': 1, 'chair': 1, 'windowsill': 1, 'light': 1, 'door': 1, 'radiator': 1, 'floor': 1, 'table': 1}
+room:30 scan: fcf66db4-622d-291c-8720-d0a6bbd17846
+{'shelf': 5, 'window': 2, 'floor': 1, 'wall': 4, 'organizer': 1, 'box': 14, 'ceiling': 1, 'windowsill': 1}
+room:31 scan: fcf66dba-622d-291c-8537-1ab5313bc52a
+{'floor': 1, 'door': 1, 'ceiling': 1, 'light': 3, 'desk': 1, 'chair': 1, 'shelf': 10, 'boxes': 1, 'wall': 4, 'window': 2, 'item': 2, 'box': 11, 'computer': 1, 'printer': 1, 'table': 1, 'radiator': 1, 'windowsill': 1, 'basket': 1}
+room:31 scan: fcf66dbe-622d-291c-8790-49f1fe8a02e5
+{'shelf': 9, 'wall': 4, 'box': 8, 'floor': 1, 'window': 1, 'boxes': 1, 'radiator': 1, 'basket': 1, 'item': 1, 'door': 1, 'desk': 1, 'ceiling': 1, 'chair': 1, 'computer': 1, 'light': 3, 'printer': 1, 'table': 1}
+room:31 scan: fcf66dbc-622d-291c-8481-6e8761c93e21
+{'window': 2, 'radiator': 1, 'box': 6, 'floor': 1, 'shelf': 9, 'chair': 1, 'desk': 1, 'wall': 1, 'basket': 1, 'computer': 1, 'windowsill': 1, 'item': 1, 'printer': 1, 'table': 1}
+room:32 scan: feefd90b-9d00-2ce5-8119-b936443cc39b
+{'wall': 8, 'shelf': 3, 'item': 2, 'box': 21, 'plant': 1, 'light': 1, 'floor': 1, 'door': 2, 'boxes': 1, 'ceiling': 2, 'doorframe': 1, 'showcase': 1, 'cabinet': 1, 'clothes': 1}
+room:32 scan: 787ed590-9d98-2c97-80db-89baaa605049
+{'wall': 5, 'ceiling': 1, 'doorframe': 2, 'door': 3, 'floor': 1, 'showcase': 1, 'item': 1, 'clothes': 1, 'cabinet': 1, 'light': 1}
