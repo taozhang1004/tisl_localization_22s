@@ -11,6 +11,7 @@ from tkinter.messagebox import NO
 from typing import List, Tuple, Dict, Union
 import numpy as np
 from data import *
+import copy
 
 
 def get_directories(path:str, print_result=True) -> List[str]:
@@ -219,8 +220,10 @@ def get_object_class_direct() -> dict:
     Returns:
         dictionary where key is the object label and the value is its one-hot class
     '''
+    obj_lst = OBJ_OF_INTEREST
+
     # Get objects of interest 
-    num_objects_of_interest = len(OBJ_OF_INTEREST)
+    num_objects_of_interest = len(obj_lst)
     # print(objects_of_interest, num_objects_of_interest)
 
     # Construct one-hot vector
@@ -232,14 +235,14 @@ def get_object_class_direct() -> dict:
 
     # Associate objects of interest with their one-hot class
     obj_dic = {}
-    for i, kind in enumerate(OBJ_OF_INTEREST):
+    for i, kind in enumerate(obj_lst):
         for obj in kind:
             obj_dic[obj] = one_hots[i]
     # print(obj_dic["pillow"])
-    return obj_dic
+    return num_objects_of_interest, obj_dic
 
 
-def get_object_info_json(path:str, threshold:int) -> Tuple[int, List[Tuple]]:
+def get_object_info_json(path:str, threshold:int, mask:int) -> Tuple[int, List[Tuple]]:
     '''
     Get object information from .json file
 
@@ -252,8 +255,7 @@ def get_object_info_json(path:str, threshold:int) -> Tuple[int, List[Tuple]]:
         list of information of each object in the .json file
     '''
     if threshold == -1:
-        obj_dic = get_object_class_direct()
-        num_of_classes = len(OBJ_OF_INTEREST)
+        num_of_classes, obj_dic = get_object_class_direct()
     else:
         obj_dic = get_object_class(threshold)
         num_of_classes = len(obj_dic)
@@ -262,12 +264,18 @@ def get_object_info_json(path:str, threshold:int) -> Tuple[int, List[Tuple]]:
         data = json.load(f)
     f.close()
 
+    # Trick
+    if mask == -1:
+        mask_lst = []
+    else:
+        mask_lst = OBJ_OF_INTEREST[mask]
+
     lst = []
     for obj in data['segGroups']:
         pos = torch.tensor(obj['obb']['centroid'])
         normal = torch.tensor(obj['dominantNormal'])
         raw_label = obj['label']
-        if raw_label in obj_dic.keys():
+        if raw_label in obj_dic.keys() and (raw_label not in mask_lst):
             label = obj_dic[raw_label]
             ignore = False
         else:
@@ -301,7 +309,9 @@ def get_scan_emb_info(scan:str) -> torch.Tensor:
     return tch_mtx
 
 
-def generate_graphs(data_path:str, f_path:str, scans:dict, num:int, pattern:Tuple[int], pos_ind:int, feat_ind:int, base:int, method:int, ratio:float, threshold:int) -> int:
+def generate_graphs(data_path:str, f_path:str, scans:dict, num:int, \
+    pattern:Tuple[int], pos_ind:int, feat_ind:int, base:int, \
+        method:int, ratio:float, threshold:int, mask:int) -> int:
     '''
     Generate graphs for given scans, and write them onto the given .txt file
 
@@ -327,7 +337,7 @@ def generate_graphs(data_path:str, f_path:str, scans:dict, num:int, pattern:Tupl
         
         # get obj info
         path = join(data_path, scan, 'semseg.v2.json')
-        num_class, obj_info = get_object_info_json(path, threshold)
+        num_class, obj_info = get_object_info_json(path, threshold, mask)
 
         # then get obj vertex
         obj_v = grakit.load_object_vertex(raw_vs=obj_info, pos_ind=pos_ind, feat_ind=feat_ind)
@@ -346,27 +356,27 @@ def generate_graphs(data_path:str, f_path:str, scans:dict, num:int, pattern:Tupl
             if set == 0: # prototype
                 sample_obj_v = random.sample(obj_v, random.randint(0, len(obj_v)))
                 sample_emb_v = random.sample(emb_v, random.randint(0, len(emb_v)))
-            elif set == 1: # all
-                sample_obj_v = obj_v
-                sample_emb_v = emb_v
-            elif set == 2:
+            elif set == 1:
                 sample_obj_v = random.sample(obj_v, min(len(obj_v), random.randint(2, 4)))
                 sample_emb_v = random.sample(emb_v, min(len(emb_v), random.randint(2, 4)))
-            elif set == 3:
+            elif set == 2:
                 sample_obj_v = random.sample(obj_v, min(len(obj_v), random.randint(6, 8)))
                 sample_emb_v = random.sample(emb_v, min(len(emb_v), random.randint(6, 8)))
-            elif set == 4:
+            elif set == 3:
                 sample_obj_v = random.sample(obj_v, min(len(obj_v), random.randint(10, 12)))
                 sample_emb_v = random.sample(emb_v, min(len(emb_v), random.randint(10, 12)))
-            elif set == 5:
+            elif set == 4:
                 sample_obj_v = random.sample(obj_v, min(len(obj_v), random.randint(14, 16)))
                 sample_emb_v = random.sample(emb_v, min(len(emb_v), random.randint(14, 16)))
-            elif set == 6:
+            elif set == 5:
                 sample_obj_v = random.sample(obj_v, min(len(obj_v), random.randint(18, 20)))
                 sample_emb_v = random.sample(emb_v, min(len(emb_v), random.randint(18, 20)))
-            elif set == 7:
+            elif set == 6:
                 sample_obj_v = random.sample(obj_v, min(len(obj_v), random.randint(22, 24)))
                 sample_emb_v = random.sample(emb_v, min(len(emb_v), random.randint(22, 24)))
+            elif set == 7: # all
+                sample_obj_v = obj_v
+                sample_emb_v = emb_v
                 
             if part == 0: # obj & emb
                 sample_v = sample_obj_v + sample_emb_v
@@ -428,11 +438,11 @@ def build_dataset_train_valid(target_name:str, pos_ind:int, feat_ind:int, base:i
     
     # Generate graphs for the training set
     count_train = generate_graphs(data_path=data_path, f_path=f_path, scans=scan_to_label_train, num=10, \
-        pattern=(0,0), pos_ind=pos_ind, feat_ind=feat_ind, base=base, method=method, ratio=ratio, threshold=threshold)
+        pattern=(0,0), pos_ind=pos_ind, feat_ind=feat_ind, base=base, method=method, ratio=ratio, threshold=threshold, mask=-1)
 
     # Generate graphs for the validation
     count_valid = generate_graphs(data_path=data_path, f_path=f_path, scans=scan_to_label_valid, num=5, \
-        pattern=(0,0), pos_ind=pos_ind, feat_ind=feat_ind, base=base, method=method, ratio=ratio, threshold=threshold)
+        pattern=(0,0), pos_ind=pos_ind, feat_ind=feat_ind, base=base, method=method, ratio=ratio, threshold=threshold, mask=-1)
 
     # Conclude the file
     with open(f_path, 'r+') as f:
@@ -443,7 +453,7 @@ def build_dataset_train_valid(target_name:str, pos_ind:int, feat_ind:int, base:i
     return count_train, count_valid
 
 
-def build_dataset_test(pattern:Tuple[int], pos_ind:int, feat_ind:int, base:int, method:int, ratio:float, threshold:int) -> Tuple[int]:
+def build_dataset_test(pattern:Tuple[int], pos_ind:int, feat_ind:int, base:int, method:int, ratio:float, threshold:int, mask:int) -> Tuple[int]:
     '''
     Build test set for DGCNN.
 
@@ -464,12 +474,13 @@ def build_dataset_test(pattern:Tuple[int], pos_ind:int, feat_ind:int, base:int, 
     scan_to_label_test = generate_labels(path='rooms_cleaned_test.txt', mode=0)
 
     # Initialite the file
-    f_path = join('experiment_inputs', '{}_{}.txt'.format(pattern[0], pattern[1]))
+    f_path = join('experiment_inputs', '{}.txt'.format(mask))
+    # f_path = join('experiment_inputs', '{}_{}.txt'.format(pattern[0], pattern[1]))
     open(f_path, 'w').close()
     
     # Generate graphs for the test set
     count = generate_graphs(data_path=data_path, f_path=f_path, scans=scan_to_label_test, num=5, \
-        pattern=pattern ,pos_ind=pos_ind, feat_ind=feat_ind, base=base, method=method, ratio=ratio, threshold=threshold)
+        pattern=pattern ,pos_ind=pos_ind, feat_ind=feat_ind, base=base, method=method, ratio=ratio, threshold=threshold, mask=mask)
 
     # Conclude the file
     with open(f_path, 'r+') as f:
