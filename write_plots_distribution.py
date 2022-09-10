@@ -105,7 +105,7 @@ def make_visualizatons(distributions_path, image_p):
         plt.bar(labels, values, width=0.3, color = c)
         plt.xticks(rotation=45, fontsize=7)
         image_name = headings + 'plot.png'
-        image_path = '/' + image_name
+        image_path = image_p + '/' + image_name
         plt.savefig(image_path, dpi=300, bbox_inches='tight')
         #plt.show()
 
