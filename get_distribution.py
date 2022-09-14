@@ -55,7 +55,7 @@ def main():
   sample_rooms_path = 'rooms_cleaned_test.txt'
   distribution_objects_file_path = 'distribution_objects_test_set.txt'
   sample_rooms_lst = get_sample_rooms_lst(sample_rooms_path)
-  room = 1 
+  room = 0
   for scans in sample_rooms_lst:
     scans_lst = scans.split(" ")
     scans_lst = scans_lst[:-1]
