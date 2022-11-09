@@ -79,11 +79,11 @@ def generate_edge(vertices:List[vertex], base:int, method:int, ratio:float) -> n
         np.fill_diagonal(f_diag, 0)
         
         edge_matrix = np.logical_and(edge_matrix_raw, f_diag)
+        #print('edge_matrix.shape ', edge_matrix.shape)
         return edge_matrix
     
     elif method == 1: # similarity test
         num_v = len(vertices)
-
         if base == 0: # based on pos
             lst = [v.pos for v in vertices]
         else: # based on feat
@@ -92,16 +92,22 @@ def generate_edge(vertices:List[vertex], base:int, method:int, ratio:float) -> n
         _matrix = torch.stack(lst)
 
         dis_matrix = distance.cdist(_matrix, _matrix, 'euclidean')
-        np.put_along_axis(dis_matrix,np.argpartition(dis_matrix,3,axis=1)[:,3:],0,axis=1) # select n=3 smallest numbers
-
-        edge_matrix_raw = dis_matrix > 0
-        f_diag = np.ones((num_v, num_v))
-        np.fill_diagonal(f_diag, 0)
-        
-        edge_matrix = np.logical_and(edge_matrix_raw, f_diag)
-        return edge_matrix
+        n_neighbors = 3
+        if dis_matrix.shape[0]<n_neighbors + 1: 
+            f_diag = np.ones((num_v, num_v))
+            np.fill_diagonal(f_diag, 0)
+            #print('f_diag.shape ', f_diag.shape)
+            return f_diag
+        else:
+            f_diag = np.ones((num_v, num_v))
+            np.put_along_axis(dis_matrix,np.argpartition(dis_matrix,n_neighbors,axis=1)[:,n_neighbors:],0,axis=1)
+            edge_matrix_raw = dis_matrix > 0
+            f_diag = np.ones((num_v, num_v))
+            np.fill_diagonal(f_diag, 0)
+            edge_matrix = np.logical_and(edge_matrix_raw, f_diag)
+            #print('edge_matrix.shape ', edge_matrix.shape)
+            return edge_matrix
     
-
     else:
         print('invalid argument')
         return None
