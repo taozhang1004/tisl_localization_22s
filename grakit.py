@@ -107,7 +107,6 @@ def generate_edge(vertices:List[vertex], base:int, method:int, ratio:float) -> n
             edge_matrix = np.logical_and(edge_matrix_raw, f_diag)
             #print('edge_matrix.shape ', edge_matrix.shape)
             return edge_matrix
-    
     else:
         print('invalid argument')
         return None
