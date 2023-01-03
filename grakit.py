@@ -188,8 +188,8 @@ def load_wall_vertex(raw_vs:List[Tuple], pos_ind:int, feat_ind:int) -> List[vert
     '''
     lst = []
     for raw_v in raw_vs:
-        if not raw_v[-1]:
-            vertex_v = vertex(1, raw_v[pos_ind], raw_v[feat_ind])
+        if raw_v[-1] == 2:
+            vertex_v = vertex(2, raw_v[pos_ind], raw_v[feat_ind])
             lst.append(vertex_v)
     return lst
 
