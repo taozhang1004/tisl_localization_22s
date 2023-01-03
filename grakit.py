@@ -149,7 +149,7 @@ class graph(object):
         Returns:
             Tuple[np.ndarray, List[np.ndarray]]: degree list and neighbor list
         '''
-        deg_lst = np.sum(self.E, axis=0)
+        deg_lst = np.sum(self.E, axis=1)
         nbs_lst_lst = [np.where(self.E[i])[0] for i in range(self.V_size)]
         return (deg_lst, nbs_lst_lst)
 
