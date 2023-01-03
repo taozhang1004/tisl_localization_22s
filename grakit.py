@@ -92,20 +92,20 @@ def generate_edge(vertices:List[vertex], base:int, method:int, ratio:float) -> n
         _matrix = torch.stack(lst)
 
         dis_matrix = distance.cdist(_matrix, _matrix, 'euclidean')
-        n_neighbors = 3
-        if dis_matrix.shape[0]<n_neighbors + 1: 
+        n_neighbors = 4
+        if dis_matrix.shape[0]<=n_neighbors + 1: 
             f_diag = np.ones((num_v, num_v))
             np.fill_diagonal(f_diag, 0)
-            #print('f_diag.shape ', f_diag.shape)
-            return f_diag
+            edge_matrix = f_diag > 0
+            edge_matrix = np.logical_and(edge_matrix, f_diag)
+            return edge_matrix
         else:
             f_diag = np.ones((num_v, num_v))
-            np.put_along_axis(dis_matrix,np.argpartition(dis_matrix,n_neighbors,axis=1)[:,n_neighbors:],0,axis=1)
+            np.put_along_axis(dis_matrix,np.argpartition(dis_matrix,n_neighbors+1,axis=1)[:,n_neighbors+1:],0,axis=1) 
             edge_matrix_raw = dis_matrix > 0
             f_diag = np.ones((num_v, num_v))
             np.fill_diagonal(f_diag, 0)
             edge_matrix = np.logical_and(edge_matrix_raw, f_diag)
-            #print('edge_matrix.shape ', edge_matrix.shape)
             return edge_matrix
     else:
         print('invalid argument')
