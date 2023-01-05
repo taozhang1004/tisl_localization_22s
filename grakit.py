@@ -39,6 +39,13 @@ class vertex(object):
 class obj_vertex(vertex):
     pass
 
+def sym_matr(matr):
+ 
+    for i in range(0, matr.shape[0]):
+        for j in range(0, matr.shape[1]):
+            if (j < i):
+                    matr[i][j] = matr[j][i]
+    return matr
 
 def generate_edge(vertices:List[vertex], base:int, method:int, ratio:float) -> np.ndarray:
     '''
@@ -98,6 +105,7 @@ def generate_edge(vertices:List[vertex], base:int, method:int, ratio:float) -> n
             np.fill_diagonal(f_diag, 0)
             edge_matrix = f_diag > 0
             edge_matrix = np.logical_and(edge_matrix, f_diag)
+            edge_matrix = sym_matr(edge_matrix)
             return edge_matrix
         else:
             f_diag = np.ones((num_v, num_v))
@@ -106,6 +114,7 @@ def generate_edge(vertices:List[vertex], base:int, method:int, ratio:float) -> n
             f_diag = np.ones((num_v, num_v))
             np.fill_diagonal(f_diag, 0)
             edge_matrix = np.logical_and(edge_matrix_raw, f_diag)
+            edge_matrix = sym_matr(edge_matrix)
             return edge_matrix
     else:
         print('invalid argument')
