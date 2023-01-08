@@ -72,11 +72,10 @@ def get_distribution_of_objects(scan, distribution_file_path, room):
       data = load_json(filename_extended)
       label_dict = extract_segGroup_objects(data)
       with open(distribution_file_path, 'a') as distribution_objects_file:
-        distribution_objects_file.write('room:')
+        distribution_objects_file.write('room: ')
         distribution_objects_file.write(str(room))
         distribution_objects_file.write(' ')
-        distribution_objects_file.write('scan:')
-        distribution_objects_file.write(' ')
+        distribution_objects_file.write('scan: ')
         distribution_objects_file.write(scan_name)
         distribution_objects_file.write('\n')
         distribution_objects_file.write(str(label_dict))
