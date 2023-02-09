@@ -59,7 +59,7 @@ def generate_edge(vertices:List[vertex], base:int, method:int, ratio:float) -> n
         method: indicates which method to decide whether there is an egde
             0 if using l2 distance
             1 if using similarity test
-        ratio: ratio for method
+        ratio: ratio for method = 0, n_neighbors for method = 1
 
     Returns:
         edge matrix: classic adjacency matrix but with diagonal being all 0
@@ -99,7 +99,7 @@ def generate_edge(vertices:List[vertex], base:int, method:int, ratio:float) -> n
         _matrix = torch.stack(lst)
 
         dis_matrix = distance.cdist(_matrix, _matrix, 'euclidean')
-        n_neighbors = 4
+        n_neighbors = int(ratio)
         if dis_matrix.shape[0]<=n_neighbors + 1: 
             f_diag = np.ones((num_v, num_v))
             np.fill_diagonal(f_diag, 0)
